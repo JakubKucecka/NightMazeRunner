@@ -31,7 +31,7 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lastTime = Time.time - 0.5f;
+        lastTime = Time.time - 1f;
         loadLevelItems();
 
         player = GetComponentInChildren<Player>();
@@ -52,7 +52,7 @@ public class Game : MonoBehaviour
     {
         Cursor.visible = false;
 
-        if (Time.time - lastTime > 0.5f)
+        if (Time.time - lastTime > 1f)
         {
             if (Input.GetKey(KeyCode.R))
             {

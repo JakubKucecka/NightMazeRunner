@@ -18,14 +18,24 @@ public class Player : MonoBehaviour
     public PlayerMove moveControler;
     public PlayerRotation rotateControler;
     public GameObject night;
+    public GameObject detector;
+
+    [SerializeField]
+    Material redMat;
+    [SerializeField]
+    Material greenMat;
 
     Light[] lights;
+    float blinkTime;
+    bool isRed;
 
     // Start is called before the first frame update
     void Start()
     {
+        blinkTime = 0;
+        isRed = false;
         useItems = false;
-        energyDecrease = 2;
+        energyDecrease = 5;
 
         moveControler = GetComponentInChildren<PlayerMove>();
         rotateControler = GetComponentInChildren<PlayerRotation>();
@@ -44,16 +54,26 @@ public class Player : MonoBehaviour
             {
                 energy -= energyDecrease * Time.deltaTime;
             }
-        } else
+        }
+        else
         {
             turnOffAllItemsWithout(0);
         }
 
-        if (useLight) {
+        if (useLight)
+        {
             turnOnLight();
-        } else
+        }
+        else
         {
             turnOffLight();
+        }
+
+        // TODO: useDetector && ghost is near
+        if (blinkTime < Time.time)
+        {
+            changeDetectorColor();
+            blinkTime = Time.time + 0.5f;
         }
     }
 
@@ -76,8 +96,10 @@ public class Player : MonoBehaviour
         {
             turnOffAllItemsWithout(0);
             turnOffLight();
-        } else
+        }
+        else
         {
+            // TODO: set player.energyDecrease from JSON
             turnOffAllItemsWithout(1);
             turnOnLight();
         }
@@ -132,5 +154,18 @@ public class Player : MonoBehaviour
         }
         if (without != 3) useDetector = false;
         useItems = false;
+    }
+
+    public void changeDetectorColor()
+    {
+        if (isRed)
+        {
+            isRed = false;
+            detector.GetComponent<MeshRenderer>().material = greenMat;
+        } else
+        {
+            isRed = true;
+            detector.GetComponent<MeshRenderer>().material = redMat;
+        }
     }
 }

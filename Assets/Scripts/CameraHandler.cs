@@ -11,7 +11,6 @@ public class CameraHandler : MonoBehaviour
     public GameObject night;
     public GameObject globalNightVission;
     public GameObject playerNightVission;
-    public GameObject spotLight;
 
     Player player;
     PlayerMove moveControler;
@@ -54,6 +53,7 @@ public class CameraHandler : MonoBehaviour
         }
         else
         {
+            // TODO: set player.energyDecrease from JSON
             night.SetActive(false);
             player.turnOffAllItemsWithout(2);
             player.useItems = true;
@@ -72,10 +72,8 @@ public class CameraHandler : MonoBehaviour
             moveControler.firstPerson = false;
             rotateControler.firstPerson = false;
 
-            //var newRoattaion = moveControler.transform.rotation;
             moveControler.transform.rotation = moveControler.startRotation;
-            //rotateControler.transform.rotation = newRoattaion;
-            spotLight.transform.Rotate(0, -270, 0);
+            player.GetComponentInChildren<Light>().transform.Rotate(0, -270, 0);
         }
         else
         {
