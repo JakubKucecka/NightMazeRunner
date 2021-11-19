@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     public PlayerMove moveControler;
     public PlayerRotation rotateControler;
+    public GameObject night;
 
     Light[] lights;
 
@@ -37,10 +38,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (energy > 0 && useItems)
+        if (energy > 0)
         {
-            energy -= energyDecrease * Time.deltaTime;
-        } 
+            if (useItems)
+            {
+                energy -= energyDecrease * Time.deltaTime;
+            }
+        } else
+        {
+            turnOffAllItemsWithout(0);
+        }
 
         if (useLight) {
             turnOnLight();
@@ -67,9 +74,11 @@ public class Player : MonoBehaviour
     {
         if (useLight)
         {
+            turnOffAllItemsWithout(0);
             turnOffLight();
         } else
         {
+            turnOffAllItemsWithout(1);
             turnOnLight();
         }
     }
@@ -78,7 +87,6 @@ public class Player : MonoBehaviour
     {
         if (energy > 0)
         {
-            turnOffAllItemsWithout(1);
             useLight = true;
             useItems = true;
             foreach (var l in lights)
@@ -89,7 +97,6 @@ public class Player : MonoBehaviour
     }
     public void turnOffLight()
     {
-        turnOffAllItemsWithout(0);
         foreach (var l in lights)
         {
             l.enabled = false;
@@ -118,7 +125,11 @@ public class Player : MonoBehaviour
     public void turnOffAllItemsWithout(int without)
     {
         if (without != 1) useLight = false;
-        if (without != 2) useNightVission = false;
+        if (without != 2)
+        {
+            night.SetActive(true);
+            useNightVission = false;
+        }
         if (without != 3) useDetector = false;
         useItems = false;
     }

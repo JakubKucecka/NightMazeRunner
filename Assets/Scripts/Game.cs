@@ -108,60 +108,62 @@ public class Game : MonoBehaviour
         // level 1
         unlockedLevels.Add(1, true);
         levelPositions.Add(coinPrefab, new List<Vector3>());
-        levelPositions[coinPrefab].Add(new Vector3(15.1f, 6f, 14.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-23.7f, 6f, 14.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-4.9f, 6f, 14.9f));
-        levelPositions[coinPrefab].Add(new Vector3(15.1f, 6f, -15.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-23.7f, 6f, -15.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-4.9f, 6f, -15.9f));
+        levelPositions[coinPrefab].Add(new Vector3(15f, 6f, 15f));
+        levelPositions[coinPrefab].Add(new Vector3(-25f, 6f, 15f));
+        levelPositions[coinPrefab].Add(new Vector3(-5f, 6f, 15f));
+        levelPositions[coinPrefab].Add(new Vector3(15f, 6f, -15f));
+        levelPositions[coinPrefab].Add(new Vector3(-25f, 6f, -15f));
 
         levelPositions.Add(batteryPrefab, new List<Vector3>());
-        levelPositions[batteryPrefab].Add(new Vector3(-5.5f, 6f, -25f));
+        levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, -25f));
         levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, 25f));
-        levelPositions[batteryPrefab].Add(new Vector3(15f, 6f, -4.8f));
+        levelPositions[batteryPrefab].Add(new Vector3(5f, 6f, -5f));
 
         itemsByLevels.Add(1, levelPositions);
-        levelPositions.Clear();
+        levelPositions = new Dictionary<GameObject, List<Vector3>>();
 
         // level 2
         unlockedLevels.Add(2, true);
         levelPositions.Add(coinPrefab, new List<Vector3>());
-        levelPositions[coinPrefab].Add(new Vector3(15.1f, 6f, 14.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-23.7f, 6f, 14.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-4.9f, 6f, 14.9f));
-        levelPositions[coinPrefab].Add(new Vector3(15.1f, 6f, -15.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-23.7f, 6f, -15.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-4.9f, 6f, -15.9f));
+        levelPositions[coinPrefab].Add(new Vector3(25f, 6f, -25f));
+        levelPositions[coinPrefab].Add(new Vector3(-15f, 6f, -15f));
+        levelPositions[coinPrefab].Add(new Vector3(15f, 6f, 15f));
+        levelPositions[coinPrefab].Add(new Vector3(-5f, 6f, 5f));
+        levelPositions[coinPrefab].Add(new Vector3(5f, 6f, -25f));
 
         levelPositions.Add(batteryPrefab, new List<Vector3>());
-        levelPositions[batteryPrefab].Add(new Vector3(-5.5f, 6f, -25f));
-        levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, 25f));
-        levelPositions[batteryPrefab].Add(new Vector3(15f, 6f, -4.8f));
+        levelPositions[batteryPrefab].Add(new Vector3(-5f, 6f, -15f));
+        levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, 15f));
+        levelPositions[batteryPrefab].Add(new Vector3(25f, 6f, 25f));
 
         itemsByLevels.Add(2, levelPositions);
-        levelPositions.Clear();
+        levelPositions = new Dictionary<GameObject, List<Vector3>>();
 
         // level 3
         unlockedLevels.Add(3, true);
         levelPositions.Add(coinPrefab, new List<Vector3>());
-        levelPositions[coinPrefab].Add(new Vector3(15.1f, 6f, 14.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-23.7f, 6f, 14.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-4.9f, 6f, 14.9f));
-        levelPositions[coinPrefab].Add(new Vector3(15.1f, 6f, -15.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-23.7f, 6f, -15.9f));
-        levelPositions[coinPrefab].Add(new Vector3(-4.9f, 6f, -15.9f));
+        levelPositions[coinPrefab].Add(new Vector3(5f, 6f, -5f));
+        levelPositions[coinPrefab].Add(new Vector3(-5.1f, 6f, -15f));
+        levelPositions[coinPrefab].Add(new Vector3(-25f, 6f, -15f));
+        levelPositions[coinPrefab].Add(new Vector3(-15f, 6f, 15f));
+        levelPositions[coinPrefab].Add(new Vector3(15f, 6f, 15f));
 
         levelPositions.Add(batteryPrefab, new List<Vector3>());
-        levelPositions[batteryPrefab].Add(new Vector3(-5.5f, 6f, -25f));
-        levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, 25f));
-        levelPositions[batteryPrefab].Add(new Vector3(15f, 6f, -4.8f));
+        levelPositions[batteryPrefab].Add(new Vector3(25f, 6f, -25f));
+        levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, 5f));
+        levelPositions[batteryPrefab].Add(new Vector3(5f, 6f, 25f));
 
         itemsByLevels.Add(3, levelPositions);
-        levelPositions.Clear();
+        levelPositions = new Dictionary<GameObject, List<Vector3>>();
     }
 
     public void loadLevel()
     {
+        // TODO: from JSON
+        player.coins = 0;
+        player.lives = 3;
+        player.energy = 100;
+
         night.transform.localPosition = Vector3.zero;
 
         GameObject[] levels = GameObject.FindGameObjectsWithTag("Level");
@@ -179,14 +181,11 @@ public class Game : MonoBehaviour
         }
 
         itemSpawner.ReloadItems(itemsByLevels[level]);
-        Debug.Log($"Level {level} load succesfully, num of items in level is: {itemsByLevels[level].Values.Count}!");
     }
 
     private void LoadGameDataFromJSON()
     {
-        player.coins = 0;
-        player.lives = 3;
-        player.energy = 100;
+        // TODO: save to public object
 
         var JSONLevels = new Dictionary<int, bool>();
 
@@ -194,5 +193,12 @@ public class Game : MonoBehaviour
         {
             unlockedLevels[k] = JSONLevels[k];
         }
+    }
+
+    private void SaveGameDataToJSON()
+    {
+        // TODO: save to public object
+
+        // TODO: save to JSON
     }
 }

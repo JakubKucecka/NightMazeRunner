@@ -26,16 +26,8 @@ public class CameraHandler : MonoBehaviour
     {
         if (player == null ) player = playerGO.GetComponent<Player>();
 
-        if (player.energy <= 0)
-        {
-            player.useNightVission = false;
-        }
-
         if (player.useNightVission)
         {
-            night.SetActive(false);
-            player.turnOffAllItemsWithout(2);
-
             if (firstPersonCamera.enabled)
             {
                 globalNightVission.SetActive(false);
@@ -49,7 +41,6 @@ public class CameraHandler : MonoBehaviour
         }
         else
         {
-            night.SetActive(true);
             globalNightVission.SetActive(false);
             playerNightVission.SetActive(false);
         }
@@ -63,6 +54,7 @@ public class CameraHandler : MonoBehaviour
         }
         else
         {
+            night.SetActive(false);
             player.turnOffAllItemsWithout(2);
             player.useItems = true;
             player.useNightVission = true;
