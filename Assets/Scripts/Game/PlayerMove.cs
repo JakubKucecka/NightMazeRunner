@@ -9,8 +9,9 @@ public class PlayerMove : MonoBehaviour
 
     public Vector3 startPositon;
     public Quaternion startRotation;
+    public ButtonFunction buttonFunction;
 
-    public GameObject body;
+    public Camera bodyCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -22,22 +23,28 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
+            buttonFunction.Walk();
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
+            buttonFunction.Walk();
+            transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(0, 0, moveSpeed * Time.deltaTime);
+            buttonFunction.Walk();
+            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(0, 0, -moveSpeed * Time.deltaTime);
+            buttonFunction.Walk();
+            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
         }
+
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) buttonFunction.Idle();
     }
 
     public float sensitivity = 2f;
@@ -54,10 +61,11 @@ public class PlayerMove : MonoBehaviour
             rotation.y += Input.GetAxis(yAxis) * sensitivity;
             rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit);
             var xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up);
-            var yQuat = Quaternion.AngleAxis(rotation.y, Vector3.back);
+            var yQuat = Quaternion.AngleAxis(rotation.y, Vector3.right);
 
             transform.localRotation = xQuat;
-            body.transform.localRotation = yQuat;
+            bodyCamera.transform.localRotation = yQuat;
+            bodyCamera.transform.Rotate(0, 180, 0);
         }
     }
 }

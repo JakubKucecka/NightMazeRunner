@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public PlayerRotation rotateControler;
     public GameObject night;
     public GameObject detector;
+    public GameObject nightVisionGloves;
     [SerializeField]
     GameObject ghost;
 
@@ -85,7 +86,7 @@ public class Player : MonoBehaviour
             {
                 blinkTimeChange = 0.3f;
             }
-        } else if ( blinkTime < Time.time)
+        } else if (detector != null && blinkTime < Time.time)
         {
             detector.GetComponent<MeshRenderer>().material = greenMat;
         }
@@ -164,12 +165,13 @@ public class Player : MonoBehaviour
         if (without != 1) useLight = false;
         if (without != 2)
         {
+            nightVisionGloves.SetActive(false);
             night.SetActive(true);
             useNightVission = false;
         }
         if (without != 3)
-        { 
-            detector.SetActive(false);
+        {
+            if (detector != null) detector.SetActive(false);
             useDetector = false;
         }
         if (without == 0) useItems = false;
@@ -186,7 +188,7 @@ public class Player : MonoBehaviour
     {
         if (useDetector)
         {
-            detector.SetActive(false);
+            if (detector != null) detector.SetActive(false);
             turnOffAllItemsWithout(0);
         }
         else

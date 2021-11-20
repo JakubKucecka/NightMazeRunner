@@ -9,6 +9,7 @@ public class CameraHandler : MonoBehaviour
     public Camera overheadCamera;
 
     public GameObject night;
+    public GameObject nightVisionGloves;
     public GameObject globalNightVission;
     public GameObject playerNightVission;
 
@@ -23,7 +24,7 @@ public class CameraHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player == null ) player = playerGO.GetComponent<Player>();
+        if (player == null) player = playerGO.GetComponent<Player>();
 
         if (player.useNightVission)
         {
@@ -54,8 +55,9 @@ public class CameraHandler : MonoBehaviour
         else
         {
             // TODO: set player.energyDecrease from JSON
-            if(player.gameItems["glasses"])
+            if (player.gameItems["glasses"])
             {
+                nightVisionGloves.SetActive(true);
                 night.SetActive(false);
                 player.turnOffAllItemsWithout(2);
                 player.useItems = true;
@@ -76,7 +78,6 @@ public class CameraHandler : MonoBehaviour
             rotateControler.firstPerson = false;
 
             moveControler.transform.rotation = moveControler.startRotation;
-            player.GetComponentInChildren<Light>().transform.Rotate(0, -270, 0);
         }
         else
         {
@@ -91,7 +92,6 @@ public class CameraHandler : MonoBehaviour
             var newRoattaion = rotateControler.transform.rotation;
             rotateControler.transform.rotation = moveControler.startRotation;
             moveControler.transform.rotation = newRoattaion;
-            player.GetComponentInChildren<Light>().transform.Rotate(0, 270, 0);
         }
     }
 

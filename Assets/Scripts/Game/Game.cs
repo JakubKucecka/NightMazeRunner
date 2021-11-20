@@ -174,7 +174,7 @@ public class Game : MonoBehaviour
         // TODO: from JSON
         player.coins = 0;
         player.lives = 3;
-        player.energy = 100;
+        player.energy = 1000000;
         ghost.ReloadGhost();
         player.RestartPlayer();
 
