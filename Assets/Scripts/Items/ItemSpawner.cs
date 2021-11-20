@@ -24,6 +24,9 @@ public class ItemSpawner : MonoBehaviour
                 var newItem = Instantiate(item.Key, transform);
                 if (newItem.GetComponent<Coin>() != null) newItem.GetComponent<Coin>().player = player;
                 if (newItem.GetComponent<Battery>() != null) newItem.GetComponent<Battery>().player = player;
+                if (newItem.GetComponent<NightVision>() != null) newItem.GetComponent<NightVision>().player = player;
+                if (newItem.GetComponent<Detector>() != null) newItem.GetComponent<Detector>().player = player;
+                if (newItem.GetComponent<MiniMap>() != null) newItem.GetComponent<MiniMap>().player = player;
                 newItem.transform.position = i;
             }
         }

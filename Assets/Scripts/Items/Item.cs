@@ -9,11 +9,21 @@ public class Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+        if (GetComponent<NightVision>() != null || GetComponent<MiniMap>() != null)
+        {
+            transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+        }
+        else
+        {
+            transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+        }
     }
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        if (other.name == "Player")
+        {
+            Destroy(gameObject);
+        }
     }
 }

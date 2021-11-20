@@ -93,6 +93,7 @@ public class Player : MonoBehaviour
 
     public void RestartPlayer()
     {
+        turnOffAllItemsWithout(0);
         moveControler.transform.position = moveControler.startPositon;
         moveControler.transform.rotation = moveControler.startRotation;
         rotateControler.transform.rotation = rotateControler.startRotation;
@@ -166,7 +167,11 @@ public class Player : MonoBehaviour
             night.SetActive(true);
             useNightVission = false;
         }
-        if (without != 3) useDetector = false;
+        if (without != 3)
+        { 
+            detector.SetActive(false);
+            useDetector = false;
+        }
         if (without == 0) useItems = false;
     }
 

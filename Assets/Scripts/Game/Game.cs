@@ -124,6 +124,9 @@ public class Game : MonoBehaviour
         levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, 25f));
         levelPositions[batteryPrefab].Add(new Vector3(5f, 6f, -5f));
 
+        levelPositions.Add(glassPrefab, new List<Vector3>());
+        levelPositions[glassPrefab].Add(new Vector3(-5f, 6f, -25f));
+
         itemsByLevels.Add(1, levelPositions);
         levelPositions = new Dictionary<GameObject, List<Vector3>>();
 
@@ -140,6 +143,9 @@ public class Game : MonoBehaviour
         levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, 15f));
         levelPositions[batteryPrefab].Add(new Vector3(25f, 6f, 25f));
 
+        levelPositions.Add(detectorPrefab, new List<Vector3>());
+        levelPositions[detectorPrefab].Add(new Vector3(-5f, 6f, 25f));
+
         itemsByLevels.Add(2, levelPositions);
         levelPositions = new Dictionary<GameObject, List<Vector3>>();
 
@@ -155,6 +161,9 @@ public class Game : MonoBehaviour
         levelPositions[batteryPrefab].Add(new Vector3(25f, 6f, -25f));
         levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, 5f));
         levelPositions[batteryPrefab].Add(new Vector3(5f, 6f, 25f));
+
+        levelPositions.Add(mapPrefab, new List<Vector3>());
+        levelPositions[mapPrefab].Add(new Vector3(25f, 6f, 25f));
 
         itemsByLevels.Add(3, levelPositions);
         levelPositions = new Dictionary<GameObject, List<Vector3>>();
@@ -219,8 +228,8 @@ public class Game : MonoBehaviour
         //unlockedLevels.Add(3, true);
 
         player.gameItems = new Dictionary<string, bool>();
-        player.gameItems.Add("glasses", true);
-        player.gameItems.Add("detector", true);
+        player.gameItems.Add("glasses", false);
+        player.gameItems.Add("detector", false);
     }
 
     private void SaveGameDataToJSON()

@@ -39,6 +39,7 @@ public class MenuHandler : MonoBehaviour
         game.level = level;
         game.loadLevel();
         game.showMenu = false;
+        levelsCanvas.enabled = false;
     }
 
     void showLevelsCanvas()

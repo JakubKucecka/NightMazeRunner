@@ -11,8 +11,11 @@ public class Coin : MonoBehaviour
         
     }
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        player.GetComponent<Player>().coins += 1;
+        if (other.name == "Player")
+        {
+            player.GetComponent<Player>().coins += 1;
+        }
     }
 }

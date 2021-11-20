@@ -1,0 +1,32 @@
+# Blender MTL File: 'Night Vision Goggles.blend'
+# Material Count: 2
+
+newmtl Night_Vision_Google
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump A:\\UNITY PROJECT\\Car project\\Assets\\3D Objects\\Night Vision Google\\Textures\\Night Vision Google_Normal_DirectX.png
+map_Kd A:\\UNITY PROJECT\\Car project\\Assets\\3D Objects\\Night Vision Google\\Textures\\Night Vision Google_Base_Color.png
+map_Ns A:\\UNITY PROJECT\\Car project\\Assets\\3D Objects\\Night Vision Google\\Textures\\Night Vision Google_Roughness.png
+refl A:\\UNITY PROJECT\\Car project\\Assets\\3D Objects\\Night Vision Google\\Textures\\Night Vision Google_Metallic.png
+
+newmtl Night_Vision_Google_Lense
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump A:\\UNITY PROJECT\\Car project\\Assets\\3D Objects\\Night Vision Google\\Textures\\Night Vision Google Lense_Normal_DirectX.png
+map_Kd A:\\UNITY PROJECT\\Car project\\Assets\\3D Objects\\Night Vision Google\\Textures\\Night Vision Google Lense_Base_Color.png
+map_Ke A:\\UNITY PROJECT\\Car project\\Assets\\3D Objects\\Night Vision Google\\Textures\\Night Vision Google Lense_Emissive.png
+map_Ns A:\\UNITY PROJECT\\Car project\\Assets\\3D Objects\\Night Vision Google\\Textures\\Night Vision Google Lense_Roughness.png
+map_d A:\\UNITY PROJECT\\Car project\\Assets\\3D Objects\\Night Vision Google\\Textures\\Night Vision Google Lense_Opacity.png
+refl A:\\UNITY PROJECT\\Car project\\Assets\\3D Objects\\Night Vision Google\\Textures\\Night Vision Google Lense_Metallic.png
