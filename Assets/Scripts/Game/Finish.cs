@@ -5,20 +5,23 @@ using UnityEngine;
 public class Finish : MonoBehaviour
 {
     [SerializeField]
-    public GameObject playerGO;
+    GameObject gameGO;
 
-    Player player;
+    Game game;
+
 
     private void Start()
     {
-        player = playerGO.GetComponent<Player>();
+        game = gameGO.GetComponent<Game>();
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
         {
-            player.RestartPlayer();
+            // TODO: save JSON
+            game.unlockNext();
+            game.showMenu = true;
         }
     }
 }

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Dictionary<string, bool> gameItems;
     public int coins;
     public int lives;
     public float energy;
     public float energyDecrease;
+    public float saveDistance;
 
     public bool useNightVission;
     public bool useLight;
@@ -19,6 +21,8 @@ public class Player : MonoBehaviour
     public PlayerRotation rotateControler;
     public GameObject night;
     public GameObject detector;
+    [SerializeField]
+    GameObject ghost;
 
     [SerializeField]
     Material redMat;
@@ -27,12 +31,15 @@ public class Player : MonoBehaviour
 
     Light[] lights;
     float blinkTime;
+    float blinkTimeChange;
     bool isRed;
 
     // Start is called before the first frame update
     void Start()
     {
+        saveDistance = 30;
         blinkTime = 0;
+        blinkTimeChange = 0.3f;
         isRed = false;
         useItems = false;
         energyDecrease = 5;
@@ -41,8 +48,6 @@ public class Player : MonoBehaviour
         rotateControler = GetComponentInChildren<PlayerRotation>();
 
         lights = GetComponentsInChildren<Light>();
-
-        RestartPlayer();
     }
 
     // Update is called once per frame
@@ -69,11 +74,20 @@ public class Player : MonoBehaviour
             turnOffLight();
         }
 
-        // TODO: useDetector && ghost is near
-        if (blinkTime < Time.time)
+        if (useDetector && getDistanceOfGhosh() < saveDistance && blinkTime < Time.time)
         {
             changeDetectorColor();
-            blinkTime = Time.time + 0.5f;
+            blinkTime = Time.time + blinkTimeChange;
+            if(getDistanceOfGhosh() < saveDistance / 2)
+            {
+                blinkTimeChange = 0.1f;
+            } else
+            {
+                blinkTimeChange = 0.3f;
+            }
+        } else if ( blinkTime < Time.time)
+        {
+            detector.GetComponent<MeshRenderer>().material = greenMat;
         }
     }
 
@@ -153,7 +167,33 @@ public class Player : MonoBehaviour
             useNightVission = false;
         }
         if (without != 3) useDetector = false;
-        useItems = false;
+        if (without == 0) useItems = false;
+    }
+
+    float getDistanceOfGhosh()
+    {
+        float dist = Vector3.Distance(transform.position, ghost.transform.position);
+        Debug.Log(dist);
+        return dist;
+    }
+
+    public void changeUseDetector()
+    {
+        if (useDetector)
+        {
+            detector.SetActive(false);
+            turnOffAllItemsWithout(0);
+        }
+        else
+        {
+            if (gameItems["detector"])
+            {
+                detector.SetActive(true);
+                turnOffAllItemsWithout(3);
+                useDetector = true;
+                useItems = true;
+            }
+        }
     }
 
     public void changeDetectorColor()
@@ -162,7 +202,8 @@ public class Player : MonoBehaviour
         {
             isRed = false;
             detector.GetComponent<MeshRenderer>().material = greenMat;
-        } else
+        }
+        else
         {
             isRed = true;
             detector.GetComponent<MeshRenderer>().material = redMat;

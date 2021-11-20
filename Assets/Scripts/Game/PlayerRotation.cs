@@ -19,7 +19,7 @@ public class PlayerRotation : MonoBehaviour
 
     void OnGUI()
     {
-        if (cam.enabled)
+        if (cam != null && cam.enabled)
         {
             Event currentEvent = Event.current;
             Vector2 mousePos = new Vector2();

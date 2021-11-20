@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    public bool showMenu;
+
     [SerializeField]
     GameObject night;
 
@@ -39,18 +41,26 @@ public class Game : MonoBehaviour
         itemSpawner = itemSpavnerGO.GetComponentInChildren<ItemSpawner>();
         cameraHandler = GetComponentInChildren<CameraHandler>();
 
-        // for debug
-        level = 1;
-        loadLevel();
+        //// for debug
+        //level = 1;
+        //loadLevel();
 
         // wait for create object player
-        Invoke("LoadGameDataFromJSON", 2);
+        Invoke("LoadGameDataFromJSON", 0.5f);
+        showMenu = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Cursor.visible = false;
+        if (showMenu)
+        {
+            if (!Cursor.visible) Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.visible = false;
+        }
 
         if (Time.time - lastTime > 1f)
         {
@@ -80,7 +90,7 @@ public class Game : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Alpha3))
             {
-                // useDetector
+                player.changeUseDetector();
                 lastTime = Time.time;
             }
 
@@ -95,18 +105,13 @@ public class Game : MonoBehaviour
     public void RestartGame()
     {
         loadLevel();
-        ghost.ReloadGhost();
-        player.RestartPlayer();
     }
 
     public void loadLevelItems()
     {
-        unlockedLevels = new Dictionary<int, bool>();
-
         var levelPositions = new Dictionary<GameObject, List<Vector3>>();
 
         // level 1
-        unlockedLevels.Add(1, true);
         levelPositions.Add(coinPrefab, new List<Vector3>());
         levelPositions[coinPrefab].Add(new Vector3(15f, 6f, 15f));
         levelPositions[coinPrefab].Add(new Vector3(-25f, 6f, 15f));
@@ -123,7 +128,6 @@ public class Game : MonoBehaviour
         levelPositions = new Dictionary<GameObject, List<Vector3>>();
 
         // level 2
-        unlockedLevels.Add(2, true);
         levelPositions.Add(coinPrefab, new List<Vector3>());
         levelPositions[coinPrefab].Add(new Vector3(25f, 6f, -25f));
         levelPositions[coinPrefab].Add(new Vector3(-15f, 6f, -15f));
@@ -140,7 +144,6 @@ public class Game : MonoBehaviour
         levelPositions = new Dictionary<GameObject, List<Vector3>>();
 
         // level 3
-        unlockedLevels.Add(3, true);
         levelPositions.Add(coinPrefab, new List<Vector3>());
         levelPositions[coinPrefab].Add(new Vector3(5f, 6f, -5f));
         levelPositions[coinPrefab].Add(new Vector3(-5.1f, 6f, -15f));
@@ -163,6 +166,8 @@ public class Game : MonoBehaviour
         player.coins = 0;
         player.lives = 3;
         player.energy = 100;
+        ghost.ReloadGhost();
+        player.RestartPlayer();
 
         night.transform.localPosition = Vector3.zero;
 
@@ -183,16 +188,39 @@ public class Game : MonoBehaviour
         itemSpawner.ReloadItems(itemsByLevels[level]);
     }
 
+    public void unlockNext()
+    {
+        if (unlockedLevels.ContainsKey(level + 1))
+        {
+            unlockedLevels[level + 1] = true;
+        } else
+        {
+            unlockedLevels.Add(level + 1, true);
+        }
+    }
+
+    public void lockAll()
+    {
+        foreach (var key in unlockedLevels.Keys)
+        {
+            if (key == 1) continue;
+
+            unlockedLevels[key] = false;
+        }
+    }
+
     private void LoadGameDataFromJSON()
     {
         // TODO: save to public object
 
-        var JSONLevels = new Dictionary<int, bool>();
+        unlockedLevels = new Dictionary<int, bool>();
+        unlockedLevels.Add(1, true);
+        //unlockedLevels.Add(2, true);
+        //unlockedLevels.Add(3, true);
 
-        foreach (var k in JSONLevels.Keys)
-        {
-            unlockedLevels[k] = JSONLevels[k];
-        }
+        player.gameItems = new Dictionary<string, bool>();
+        player.gameItems.Add("glasses", true);
+        player.gameItems.Add("detector", true);
     }
 
     private void SaveGameDataToJSON()

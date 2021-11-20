@@ -114,7 +114,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &205977957
 Transform:
   m_ObjectHideFlags: 0
@@ -157,7 +157,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f5257a8261a988c40affe9470fd30ea3, type: 2}
+  - {fileID: 2100000, guid: c61090dcc7df0e943a302aedef777e48, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -582,6 +582,7 @@ MonoBehaviour:
   lives: 3
   energy: 100
   energyDecrease: 2
+  saveDistance: 0
   useNightVission: 0
   useLight: 0
   useDetector: 0
@@ -590,6 +591,9 @@ MonoBehaviour:
   rotateControler: {fileID: 0}
   night: {fileID: 0}
   detector: {fileID: 205977956}
+  ghost: {fileID: 0}
+  redMat: {fileID: 2100000, guid: f5257a8261a988c40affe9470fd30ea3, type: 2}
+  greenMat: {fileID: 2100000, guid: c61090dcc7df0e943a302aedef777e48, type: 2}
 --- !u!54 &2080295517
 Rigidbody:
   m_ObjectHideFlags: 0

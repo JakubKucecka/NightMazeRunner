@@ -54,10 +54,13 @@ public class CameraHandler : MonoBehaviour
         else
         {
             // TODO: set player.energyDecrease from JSON
-            night.SetActive(false);
-            player.turnOffAllItemsWithout(2);
-            player.useItems = true;
-            player.useNightVission = true;
+            if(player.gameItems["glasses"])
+            {
+                night.SetActive(false);
+                player.turnOffAllItemsWithout(2);
+                player.useItems = true;
+                player.useNightVission = true;
+            }
         }
     }
 
