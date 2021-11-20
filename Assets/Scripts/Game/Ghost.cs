@@ -14,6 +14,7 @@ public class Ghost : MonoBehaviour
 
     float changeDirTime = 0;
     Vector3 dir;
+    Quaternion rotate;
 
     Vector3 up = new Vector3(1, 0, 0);
     Vector3 down = new Vector3(-1, 0, 0);
@@ -43,6 +44,7 @@ public class Ghost : MonoBehaviour
         }
 
         transform.Translate(dir * speed * Time.deltaTime);
+        transform.GetChild(0).rotation = rotate;
     }
 
     public void GetDir()
@@ -58,6 +60,7 @@ public class Ghost : MonoBehaviour
 
         int index = Random.Range(0, dirs.Count);
         dir = dirs[index];
+        rotate = GetRotate();
     }
 
     private List<Vector3> getPlayerPosition(List<Vector3> dirs)
@@ -94,5 +97,25 @@ public class Ghost : MonoBehaviour
     public void ReloadGhost()
     {
         transform.position = startPosition;
+    }
+
+    Quaternion GetRotate()
+    {
+        if (dir == up)
+        {
+            return Quaternion.Euler(Vector3.up * -90);
+        }
+        else if (dir == down)
+        {
+            return Quaternion.Euler(Vector3.up * 90);
+        }
+        else if (dir == right)
+        {
+            return Quaternion.Euler(Vector3.up * 0);
+        }
+        else
+        {
+            return Quaternion.Euler(Vector3.up * 180);
+        }
     }
 }
