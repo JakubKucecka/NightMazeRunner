@@ -13,7 +13,7 @@ public class LevelsHandler : MonoBehaviour
         Game game = gameGO.GetComponent<Game>();
         var levelsButtons = GetComponentsInChildren<Button>();
 
-        for (var i = 0; i < levelsButtons.Length; i++)
+        for (var i = 0; i < levelsButtons.Length-1; i++)
         {
             levelsButtons[i].interactable = game.unlockedLevels.ContainsKey(i + 1) && game.unlockedLevels[i + 1] ? true : false;
         }

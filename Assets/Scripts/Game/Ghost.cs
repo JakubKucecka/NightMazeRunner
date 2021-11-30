@@ -51,10 +51,10 @@ public class Ghost : MonoBehaviour
     {
         List<Vector3> dirs = new List<Vector3>();
 
-        if (transform.position.x <= border) dirs.Add(down);
-        if (transform.position.x >= -1 * border) dirs.Add(up);
-        if (transform.position.z <= border) dirs.Add(right);
-        if (transform.position.z >= -1 * border) dirs.Add(left);
+        if (transform.position.x + 3 <= border) dirs.Add(down);
+        if (transform.position.x - 3 >= -1 * border) dirs.Add(up);
+        if (transform.position.z + 3 <= border) dirs.Add(right);
+        if (transform.position.z - 3 >= -1 * border) dirs.Add(left);
 
         dirs = getPlayerPosition(dirs);
 

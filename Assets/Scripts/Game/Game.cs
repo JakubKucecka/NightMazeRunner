@@ -64,37 +64,37 @@ public class Game : MonoBehaviour
 
         if (Time.time - lastTime > 1f)
         {
-            if (Input.GetKey(KeyCode.R))
+            if (Input.GetButtonDown("Restart"))
             {
                 RestartGame();
                 lastTime = Time.time;
             }
 
-            if (Input.GetKey(KeyCode.Escape))
+            if (Input.GetButtonDown("BackToMenu"))
             {
-                // show menu
+                showMenu = true;
                 lastTime = Time.time;
             }
 
-            if (Input.GetKey(KeyCode.Alpha1))
+            if (Input.GetButtonDown("SwitchLight"))
             {
                 player.changeUseLight();
                 lastTime = Time.time;
             }
 
-            if (Input.GetKey(KeyCode.Alpha2))
+            if (Input.GetButtonDown("SwitchGloves"))
             {
                 cameraHandler.changeUseGlasses();
                 lastTime = Time.time;
             }
 
-            if (Input.GetKey(KeyCode.Alpha3))
+            if (Input.GetButtonDown("SwitchDetector"))
             {
                 player.changeUseDetector();
                 lastTime = Time.time;
             }
 
-            if (Input.GetKey(KeyCode.C))
+            if (Input.GetButtonDown("ChangeCameras"))
             {
                 cameraHandler.changeCamera();
                 lastTime = Time.time;

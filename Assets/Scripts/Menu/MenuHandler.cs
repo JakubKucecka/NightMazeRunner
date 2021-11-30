@@ -4,48 +4,30 @@ using UnityEngine;
 
 public class MenuHandler : MonoBehaviour
 {
-    [SerializeField]
-    GameObject gameGO;
-    Game game;
-
-    public Camera menuCamera;
-    public Camera mainCamera;
-    public Camera firstPersonCamera;
-
-    public Canvas levelsCanvas;
+    public List<Canvas> menuCanvases;
     // Start is called before the first frame update
     void Start()
     {
-        game = gameGO.GetComponent<Game>();
-        Invoke("showLevelsCanvas", 2);
+        ShowHome();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowHome()
     {
-        if (!game.showMenu)
+        HideAll();
+        menuCanvases[0].gameObject.SetActive(true);
+    }
+
+    public void ShowCanvas(Canvas canvas)
+    {
+        HideAll();
+        canvas.gameObject.SetActive(true);
+    }
+
+    public void HideAll()
+    {
+        foreach (Canvas c in menuCanvases)
         {
-            menuCamera.enabled = false;
-        } else if (!menuCamera.enabled)
-        {
-            showLevelsCanvas();
-            menuCamera.enabled = true;
+            c.gameObject.SetActive(false);
         }
-    }
-
-    public void startLevel(int level)
-    {
-        menuCamera.enabled = false;
-        game.level = level;
-        game.loadLevel();
-        game.showMenu = false;
-        levelsCanvas.enabled = false;
-    }
-
-    void showLevelsCanvas()
-    {
-        levelsCanvas.gameObject.SetActive(true);
-        levelsCanvas.enabled = true;
-        levelsCanvas.GetComponent<LevelsHandler>().showLevels();
     }
 }
