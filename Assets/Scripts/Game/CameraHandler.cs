@@ -77,6 +77,7 @@ public class CameraHandler : MonoBehaviour
             moveControler.firstPerson = false;
             rotateControler.firstPerson = false;
 
+            rotateControler.transform.Rotate(0, -90, 0);
             moveControler.transform.rotation = moveControler.startRotation;
         }
         else

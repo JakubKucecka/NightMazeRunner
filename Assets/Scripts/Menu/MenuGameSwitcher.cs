@@ -10,7 +10,7 @@ public class MenuGameSwitcher : MonoBehaviour
 
     public Camera menuCamera;
     public Camera mainCamera;
-    public Camera firstPersonCamera;
+    public Camera bodyCamera;
 
     public MenuHandler menu;
     // Start is called before the first frame update
@@ -24,12 +24,25 @@ public class MenuGameSwitcher : MonoBehaviour
     {
         if (!game.showMenu)
         {
-            menuCamera.enabled = false;
+            mainCamera.enabled = true;
+            if (menuCamera != null && menuCamera.enabled) menuCamera.enabled = false;
         }
         else if (!menuCamera.enabled)
         {
             menuCamera.enabled = true;
+            if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
+            if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
             menu.ShowHome();
+        }
+
+        if (game.player.gameover)
+        {
+            menu.ShowCanvas(menu.menuCanvases[menu.menuCanvases.Count - 1]);
+            game.showMenu = true;
+            menuCamera.enabled = true;
+            if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
+            if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
+            game.player.gameover = !game.player.gameover;
         }
     }
 

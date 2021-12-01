@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bool gameIsStarted;
+
     public Dictionary<string, bool> gameItems;
     public int coins;
     public int lives;
@@ -16,15 +18,16 @@ public class Player : MonoBehaviour
     public bool useDetector;
 
     public bool useItems;
+    public bool gameover = false;
 
     public PlayerMove moveControler;
     public PlayerRotation rotateControler;
     public GameObject night;
     public GameObject detector;
     public GameObject nightVisionGloves;
+
     [SerializeField]
     GameObject ghost;
-
     [SerializeField]
     Material redMat;
     [SerializeField]
@@ -43,7 +46,7 @@ public class Player : MonoBehaviour
         blinkTimeChange = 0.3f;
         isRed = false;
         useItems = false;
-        energyDecrease = 5;
+        energyDecrease = 3;
 
         moveControler = GetComponentInChildren<PlayerMove>();
         rotateControler = GetComponentInChildren<PlayerRotation>();
@@ -54,41 +57,46 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (energy > 0)
+        if (gameIsStarted)
         {
-            if (useItems)
+            if (energy > 0)
             {
-                energy -= energyDecrease * Time.deltaTime;
+                if (useItems)
+                {
+                    energy -= energyDecrease * Time.deltaTime;
+                }
             }
-        }
-        else
-        {
-            turnOffAllItemsWithout(0);
-        }
-
-        if (useLight)
-        {
-            turnOnLight();
-        }
-        else
-        {
-            turnOffLight();
-        }
-
-        if (useDetector && getDistanceOfGhosh() < saveDistance && blinkTime < Time.time)
-        {
-            changeDetectorColor();
-            blinkTime = Time.time + blinkTimeChange;
-            if(getDistanceOfGhosh() < saveDistance / 2)
+            else
             {
-                blinkTimeChange = 0.1f;
-            } else
-            {
-                blinkTimeChange = 0.3f;
+                turnOffAllItemsWithout(0);
             }
-        } else if (detector != null && blinkTime < Time.time)
-        {
-            detector.GetComponent<MeshRenderer>().material = greenMat;
+
+            if (useLight)
+            {
+                turnOnLight();
+            }
+            else
+            {
+                turnOffLight();
+            }
+
+            if (useDetector && getDistanceOfGhosh() < saveDistance && blinkTime < Time.time)
+            {
+                changeDetectorColor();
+                blinkTime = Time.time + blinkTimeChange;
+                if (getDistanceOfGhosh() < saveDistance / 2)
+                {
+                    blinkTimeChange = 0.1f;
+                }
+                else
+                {
+                    blinkTimeChange = 0.3f;
+                }
+            }
+            else if (detector != null && blinkTime < Time.time)
+            {
+                detector.GetComponent<MeshRenderer>().material = greenMat;
+            }
         }
     }
 

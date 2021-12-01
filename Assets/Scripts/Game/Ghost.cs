@@ -30,21 +30,24 @@ public class Ghost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (changeDirTime <= Time.time)
+        if (player.gameIsStarted)
         {
-            float nextTime = Random.Range(0.5f, 2f);
-            changeDirTime += nextTime;
-            GetDir();
-        }
+            if (changeDirTime <= Time.time)
+            {
+                float nextTime = Random.Range(0.5f, 2f);
+                changeDirTime += nextTime;
+                GetDir();
+            }
 
-        if (transform.position.x >= border || transform.position.x <= -1 * border
-            || transform.position.z >= border || transform.position.z <= -1 * border)
-        {
-            GetDir();
-        }
+            if (transform.position.x >= border || transform.position.x <= -1 * border
+                || transform.position.z >= border || transform.position.z <= -1 * border)
+            {
+                GetDir();
+            }
 
-        transform.Translate(dir * speed * Time.deltaTime);
-        transform.GetChild(0).rotation = rotate;
+            transform.Translate(dir * speed * Time.deltaTime);
+            transform.GetChild(0).rotation = rotate;
+        }
     }
 
     public void GetDir()
@@ -91,6 +94,7 @@ public class Ghost : MonoBehaviour
         if (other.name == "Player")
         {
             player.GetLive();
+            if (player.lives <= 0) player.gameover = true;
         }
     }
 

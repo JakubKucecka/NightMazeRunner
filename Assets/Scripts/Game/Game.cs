@@ -14,9 +14,8 @@ public class Game : MonoBehaviour
 
     public int level;
     public Dictionary<int, bool> unlockedLevels;
-    float lastTime;
 
-    Player player;
+    public Player player;
     Ghost ghost;
     ItemSpawner itemSpawner;
     CameraHandler cameraHandler;
@@ -33,7 +32,6 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lastTime = Time.time - 1f;
         loadLevelItems();
 
         player = GetComponentInChildren<Player>();
@@ -53,6 +51,13 @@ public class Game : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        player.gameIsStarted = !showMenu;
+        if (showMenu)
+        {
+            player.rotateControler.firstPerson = false;
+            player.moveControler.firstPerson = false;
+        }
+
         if (showMenu)
         {
             if (!Cursor.visible) Cursor.visible = true;
@@ -62,44 +67,35 @@ public class Game : MonoBehaviour
             Cursor.visible = false;
         }
 
-        if (Time.time - lastTime > 1f)
-        {
             if (Input.GetButtonDown("Restart"))
             {
                 RestartGame();
-                lastTime = Time.time;
             }
 
             if (Input.GetButtonDown("BackToMenu"))
             {
                 showMenu = true;
-                lastTime = Time.time;
             }
 
             if (Input.GetButtonDown("SwitchLight"))
             {
                 player.changeUseLight();
-                lastTime = Time.time;
             }
 
             if (Input.GetButtonDown("SwitchGloves"))
             {
                 cameraHandler.changeUseGlasses();
-                lastTime = Time.time;
             }
 
             if (Input.GetButtonDown("SwitchDetector"))
             {
                 player.changeUseDetector();
-                lastTime = Time.time;
             }
 
             if (Input.GetButtonDown("ChangeCameras"))
             {
                 cameraHandler.changeCamera();
-                lastTime = Time.time;
             }
-        }
     }
 
     public void RestartGame()
@@ -174,7 +170,7 @@ public class Game : MonoBehaviour
         // TODO: from JSON
         player.coins = 0;
         player.lives = 3;
-        player.energy = 1000000;
+        player.energy = 100;
         ghost.ReloadGhost();
         player.RestartPlayer();
 

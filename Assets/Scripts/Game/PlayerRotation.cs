@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerRotation : MonoBehaviour
 {
     public bool firstPerson;
-
     public Quaternion startRotation;
 
     private Camera cam;
@@ -19,7 +18,7 @@ public class PlayerRotation : MonoBehaviour
 
     void OnGUI()
     {
-        if (cam != null && cam.enabled)
+        if (cam != null && cam.enabled && !firstPerson)
         {
             Event currentEvent = Event.current;
             Vector2 mousePos = new Vector2();

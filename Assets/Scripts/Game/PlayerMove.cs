@@ -23,31 +23,31 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetButton("MoveUp"))
         {
             buttonFunction.Walk();
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetButton("MoveDown"))
         {
             buttonFunction.Walk();
             transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetButton("MoveRight"))
         {
             buttonFunction.Walk();
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetButton("MoveLeft"))
         {
             buttonFunction.Walk();
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
         }
 
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) buttonFunction.Idle();
+        if (!Input.GetButton("MoveUp") && !Input.GetButton("MoveDown") && !Input.GetButton("MoveRight") && !Input.GetButton("MoveLeft")) buttonFunction.Idle();
     }
 
-    public float sensitivity = 2f;
+    public float sensitivity = 1f;
     Vector2 rotation = Vector2.zero;
     const string xAxis = "Mouse X";
     const string yAxis = "Mouse Y";
@@ -59,7 +59,7 @@ public class PlayerMove : MonoBehaviour
         {
             rotation.x += Input.GetAxis(xAxis) * sensitivity;
             rotation.y += Input.GetAxis(yAxis) * sensitivity;
-            rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit);
+            rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit*2);
             var xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up);
             var yQuat = Quaternion.AngleAxis(rotation.y, Vector3.right);
 
