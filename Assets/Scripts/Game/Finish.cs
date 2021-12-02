@@ -6,9 +6,7 @@ public class Finish : MonoBehaviour
 {
     [SerializeField]
     GameObject gameGO;
-
     Game game;
-
 
     private void Start()
     {
@@ -22,7 +20,14 @@ public class Finish : MonoBehaviour
             // TODO: save JSON
             game.unlockNext();
             game.SaveGameDataToJSON();
-            game.showMenu = true;
+            if (game.level == game.maxLevel)
+            {
+                game.player.finish = true;
+            }
+            else
+            {
+                game.showMenu = true;
+            }
         }
     }
 }

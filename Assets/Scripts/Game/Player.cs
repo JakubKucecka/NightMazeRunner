@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 
     public bool useItems;
     public bool gameover = false;
+    public bool finish = false;
     public bool started;
     public bool useMiniMap;
 

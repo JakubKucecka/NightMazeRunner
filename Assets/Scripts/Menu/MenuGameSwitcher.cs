@@ -39,11 +39,21 @@ public class MenuGameSwitcher : MonoBehaviour
         {
             game.player.gameover = false;
             game.showMenu = true;
-            menu.ShowCanvas(menu.menuCanvases[menu.menuCanvases.Count - 1]);
+            menu.ShowCanvas(menu.gameoverCanvas);
             menuCamera.enabled = true;
             if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
             if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
             game.GameOver();
+        }
+
+        if (game.player.finish)
+        {
+            game.player.finish = false;
+            game.showMenu = true;
+            menu.ShowCanvas(menu.congratsCanvas);
+            menuCamera.enabled = true;
+            if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
+            if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
         }
     }
 

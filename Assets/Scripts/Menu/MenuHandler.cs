@@ -5,6 +5,8 @@ using UnityEngine;
 public class MenuHandler : MonoBehaviour
 {
     public List<Canvas> menuCanvases;
+    public Canvas gameoverCanvas;
+    public Canvas congratsCanvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +31,7 @@ public class MenuHandler : MonoBehaviour
         {
             c.gameObject.SetActive(false);
         }
+        gameoverCanvas.gameObject.SetActive(false);
+        congratsCanvas.gameObject.SetActive(false);
     }
 }
