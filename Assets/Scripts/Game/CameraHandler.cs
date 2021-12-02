@@ -13,6 +13,8 @@ public class CameraHandler : MonoBehaviour
     public GameObject globalNightVission;
     public GameObject playerNightVission;
 
+    public int glovesLevel;
+
     Player player;
     PlayerMove moveControler;
     PlayerRotation rotateControler;
@@ -57,6 +59,7 @@ public class CameraHandler : MonoBehaviour
             // TODO: set player.energyDecrease from JSON
             if (player.gameItems["glasses"])
             {
+                player.energyDecrease = (float)(player.energyDecreaseMax - (0.5 * glovesLevel));
                 nightVisionGloves.SetActive(true);
                 night.SetActive(false);
                 player.turnOffAllItemsWithout(2);

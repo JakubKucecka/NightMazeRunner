@@ -15,7 +15,7 @@ public class Coin : MonoBehaviour
     {
         if (other.name == "Player")
         {
-            player.GetComponent<Player>().coins += 1;
+            player.GetComponent<Player>().coins += 2;
         }
     }
 }

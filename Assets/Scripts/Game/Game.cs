@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Game : MonoBehaviour
 {
     public bool showMenu;
+    public int maxLevel = 3;
 
     [SerializeField]
     GameObject night;
@@ -29,28 +32,33 @@ public class Game : MonoBehaviour
     public GameObject detectorPrefab;
     public GameObject mapPrefab;
 
+    string dataPath;
+    public JsonGameData gameData;
+
     // Start is called before the first frame update
     void Start()
     {
+        dataPath = Application.persistentDataPath + "/game_data.json";
+        Debug.Log(dataPath);
+        gameData = new JsonGameData();
         loadLevelItems();
 
         player = GetComponentInChildren<Player>();
         ghost = GetComponentInChildren<Ghost>();
         itemSpawner = itemSpavnerGO.GetComponentInChildren<ItemSpawner>();
         cameraHandler = GetComponentInChildren<CameraHandler>();
-
-        //// for debug
-        //level = 1;
-        //loadLevel();
-
-        // wait for create object player
-        Invoke("LoadGameDataFromJSON", 0.5f);
-        showMenu = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player != null && player.started)
+        {
+            LoadGameDataFromJSON();
+            showMenu = true;
+            player.started = false;
+        }
+
         player.gameIsStarted = !showMenu;
         if (showMenu)
         {
@@ -67,35 +75,41 @@ public class Game : MonoBehaviour
             Cursor.visible = false;
         }
 
-            if (Input.GetButtonDown("Restart"))
-            {
-                RestartGame();
-            }
+        if (Input.GetButtonDown("Restart"))
+        {
+            RestartGame();
+        }
 
-            if (Input.GetButtonDown("BackToMenu"))
-            {
-                showMenu = true;
-            }
+        if (Input.GetButtonDown("BackToMenu"))
+        {
+            if (player.useMiniMap) player.useMiniMap = false;
+            RestartGame();
+            showMenu = true;
+        }
 
-            if (Input.GetButtonDown("SwitchLight"))
-            {
-                player.changeUseLight();
-            }
+        if (Input.GetButtonDown("SwitchLight"))
+        {
+            player.changeUseLight();
+        }
 
-            if (Input.GetButtonDown("SwitchGloves"))
-            {
-                cameraHandler.changeUseGlasses();
-            }
+        if (Input.GetButtonDown("SwitchGloves"))
+        {
+            cameraHandler.changeUseGlasses();
+        }
 
-            if (Input.GetButtonDown("SwitchDetector"))
-            {
-                player.changeUseDetector();
-            }
+        if (Input.GetButtonDown("SwitchDetector"))
+        {
+            player.changeUseDetector();
+        }
 
-            if (Input.GetButtonDown("ChangeCameras"))
-            {
-                cameraHandler.changeCamera();
-            }
+        if (Input.GetButtonDown("ChangeCameras"))
+        {
+            cameraHandler.changeCamera();
+        }
+
+        player.detectorLevel = gameData.detectorLevel;
+        player.lightLevel = gameData.lightLevel;
+        cameraHandler.glovesLevel = gameData.glovesLevel;
     }
 
     public void RestartGame()
@@ -167,10 +181,7 @@ public class Game : MonoBehaviour
 
     public void loadLevel()
     {
-        // TODO: from JSON
-        player.coins = 0;
-        player.lives = 3;
-        player.energy = 100;
+        LoadGameDataFromJSON();
         ghost.ReloadGhost();
         player.RestartPlayer();
 
@@ -195,43 +206,110 @@ public class Game : MonoBehaviour
 
     public void unlockNext()
     {
-        if (unlockedLevels.ContainsKey(level + 1))
+        if (player.useMiniMap) player.useMiniMap = false;
+
+        if ( level < maxLevel)
         {
-            unlockedLevels[level + 1] = true;
-        } else
-        {
-            unlockedLevels.Add(level + 1, true);
+            if (unlockedLevels.ContainsKey(level + 1))
+            {
+                unlockedLevels[level + 1] = true;
+            }
+            else
+            {
+                unlockedLevels.Add(level + 1, true);
+            }
         }
     }
 
-    public void lockAll()
+    public void GameOver()
     {
-        foreach (var key in unlockedLevels.Keys)
-        {
-            if (key == 1) continue;
-
-            unlockedLevels[key] = false;
-        }
+        gameData = new JsonGameData();
+        string json = JsonUtility.ToJson(gameData);
+        File.WriteAllText(dataPath, json);
+        LoadGameDataFromJSON();
     }
 
-    private void LoadGameDataFromJSON()
+    public void LoadGameDataFromJSON()
     {
-        // TODO: save to public object
+        if (File.Exists(dataPath))
+        {
+            string json = File.ReadAllText(dataPath);
+            gameData = JsonUtility.FromJson<JsonGameData>(json);
+        }
 
         unlockedLevels = new Dictionary<int, bool>();
-        unlockedLevels.Add(1, true);
-        //unlockedLevels.Add(2, true);
-        //unlockedLevels.Add(3, true);
+        foreach (var i in gameData.unlockLevels)
+        {
+            unlockedLevels.Add(i, true);
+        }
 
         player.gameItems = new Dictionary<string, bool>();
-        player.gameItems.Add("glasses", false);
-        player.gameItems.Add("detector", false);
+        player.gameItems.Add("glasses", gameData.gloves);
+        player.gameItems.Add("detector", gameData.detector);
+
+        player.lives = gameData.lives;
+        player.energy = gameData.energy;
+        player.coins = gameData.coins;
     }
 
-    private void SaveGameDataToJSON()
+    public void SaveGameDataToJSON()
     {
-        // TODO: save to public object
+        var tmpLevels = new List<int>();
+        foreach (var i in unlockedLevels)
+        {
+            if (i.Value) tmpLevels.Add(i.Key);
+        }
 
-        // TODO: save to JSON
+        gameData.unlockLevels = tmpLevels.ToArray();
+
+        gameData.gloves = player.gameItems["glasses"];
+        gameData.detector = player.gameItems["detector"];
+
+        gameData.lives = player.lives;
+        gameData.energy = player.energy;
+        gameData.coins = player.coins;
+
+        string json = JsonUtility.ToJson(gameData);
+        File.WriteAllText(dataPath, json);
+    }
+
+    [Serializable]
+    public class JsonGameData
+    {
+        public float energy;
+        public int lives;
+        public int coins;
+        public int lightLevel;
+        public bool gloves;
+        public int glovesLevel;
+        public bool detector;
+        public int detectorLevel;
+        public int[] unlockLevels;
+
+        public JsonGameData(float iEnergy, int iLives, int iCoins, int iLightLevel, bool iGloves, int iGlovesLevel, bool iDetector, int iDetectorLevel, int[] iUnlockLevels)
+        {
+            energy = iEnergy;
+            lives = iLives;
+            coins = iCoins;
+            lightLevel = iLightLevel;
+            gloves = iGloves;
+            glovesLevel = iGlovesLevel;
+            detector = iDetector;
+            detectorLevel = iDetectorLevel;
+            unlockLevels = iUnlockLevels;
+        }
+
+        public JsonGameData()
+        {
+            energy = 100;
+            lives = 3;
+            coins = 0;
+            lightLevel = 1;
+            gloves = false;
+            glovesLevel = 1;
+            detector = false;
+            detectorLevel = 1;
+            unlockLevels = new int[] { 1 };
+        }
     }
 }

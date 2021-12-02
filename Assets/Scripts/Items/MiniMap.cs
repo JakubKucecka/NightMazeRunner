@@ -6,16 +6,11 @@ public class MiniMap : MonoBehaviour
 {
     public GameObject player;
 
-    private void Start()
-    {
-
-    }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
         {
-            // show map
+            player.GetComponent<Player>().useMiniMap = true;
         }
     }
 }

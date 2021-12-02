@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     public int lives;
     public float energy;
     public float energyDecrease;
+    public int energyDecreaseMax = 4;
+    public int lightLevel;
+    public int detectorLevel;
     public float saveDistance;
 
     public bool useNightVission;
@@ -19,6 +22,8 @@ public class Player : MonoBehaviour
 
     public bool useItems;
     public bool gameover = false;
+    public bool started;
+    public bool useMiniMap;
 
     public PlayerMove moveControler;
     public PlayerRotation rotateControler;
@@ -41,12 +46,16 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        started = true;
         saveDistance = 30;
         blinkTime = 0;
         blinkTimeChange = 0.3f;
         isRed = false;
         useItems = false;
-        energyDecrease = 3;
+        energyDecrease = energyDecreaseMax;
+        lightLevel = 1;
+        detectorLevel = 1;
+        useMiniMap = false;
 
         moveControler = GetComponentInChildren<PlayerMove>();
         rotateControler = GetComponentInChildren<PlayerRotation>();
@@ -69,6 +78,7 @@ public class Player : MonoBehaviour
             else
             {
                 turnOffAllItemsWithout(0);
+                energy = 0;
             }
 
             if (useLight)
@@ -107,6 +117,7 @@ public class Player : MonoBehaviour
         moveControler.transform.rotation = moveControler.startRotation;
         rotateControler.transform.rotation = rotateControler.startRotation;
         useLight = true;
+        useMiniMap = false;
 
         foreach (var l in lights)
         {
@@ -131,6 +142,7 @@ public class Player : MonoBehaviour
 
     public void turnOnLight()
     {
+        energyDecrease = (float)(energyDecreaseMax - (0.5 * lightLevel));
         if (energy > 0)
         {
             useLight = true;
@@ -203,6 +215,7 @@ public class Player : MonoBehaviour
         {
             if (gameItems["detector"])
             {
+                energyDecrease = (float)(energyDecreaseMax - (0.5 * detectorLevel));
                 detector.SetActive(true);
                 turnOffAllItemsWithout(3);
                 useDetector = true;

@@ -23,6 +23,11 @@ public class InfoHandler : MonoBehaviour
     [SerializeField]
     GameObject detector;
 
+    [SerializeField]
+    Image miniMap;
+    [SerializeField]
+    Image playerMapPosition;
+
     private List<GameObject> lives = new List<GameObject>();
     private float enegyMax = 300;
     private float energyWidth;
@@ -51,13 +56,18 @@ public class InfoHandler : MonoBehaviour
         {
             GameObject.Destroy(lives[lives.Count - 1]);
             lives.Remove(lives[lives.Count - 1]);
-
         }
 
         coins.text = $"{player.coins * 10}";
 
         detector.SetActive(player.gameItems != null && player.gameItems["detector"]);
         gloves.SetActive(player.gameItems != null && player.gameItems["glasses"]);
+        if (miniMap != null)
+        {
+            miniMap.gameObject.SetActive(player.useMiniMap);
+            playerMapPosition.transform.localPosition = 
+                new Vector3(player.transform.position.z * 4.5f, -player.transform.position.x * 4.5f, playerMapPosition.transform.localPosition.z);
+        }
 
         if (player.energy > 0 || player.energy < 100)
         {

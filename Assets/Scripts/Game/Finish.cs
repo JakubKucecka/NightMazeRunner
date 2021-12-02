@@ -21,6 +21,7 @@ public class Finish : MonoBehaviour
         {
             // TODO: save JSON
             game.unlockNext();
+            game.SaveGameDataToJSON();
             game.showMenu = true;
         }
     }
