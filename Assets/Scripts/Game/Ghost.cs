@@ -9,7 +9,8 @@ public class Ghost : MonoBehaviour
 
     [SerializeField]
     private int border = 25;
-    public float speed = 4f;
+    public float startSpeed = 4f;
+    public float speed;
     public Vector3 startPosition;
 
     float changeDirTime = 0;
@@ -21,9 +22,16 @@ public class Ghost : MonoBehaviour
     Vector3 right = new Vector3(0, 0, 1);
     Vector3 left = new Vector3(0, 0, -1);
 
+    public List<Canvas> attackCanvas = new List<Canvas>();
+    float blinkTime;
+    float blinkTimeChange = 0.30f;
+    int blinkCounter;
+    bool attack;
+
     // Start is called before the first frame update
     void Start()
     {
+        speed = startSpeed;
         startPosition = transform.position;
     }
 
@@ -47,6 +55,23 @@ public class Ghost : MonoBehaviour
 
             transform.Translate(dir * speed * Time.deltaTime);
             transform.GetChild(0).rotation = rotate;
+
+            if (attack && blinkTime < Time.time && blinkCounter < 10)
+            {
+                blinkTime = Time.time + blinkTimeChange;
+                foreach (var a in attackCanvas)
+                {
+                    a.gameObject.SetActive(!a.gameObject.activeSelf);
+                    blinkCounter += 1;
+                }
+            }
+            else
+            {
+                foreach (var a in attackCanvas)
+                {
+                    a.gameObject.SetActive(false);
+                }
+            }
         }
     }
 
@@ -95,12 +120,19 @@ public class Ghost : MonoBehaviour
         {
             player.GetLive();
             if (player.lives <= 0) player.gameover = true;
+
+            attack = true;
+            blinkCounter = 0;
+            blinkTime = 0;
         }
     }
 
     public void ReloadGhost()
     {
         transform.position = startPosition;
+        attack = false;
+        blinkCounter = 0;
+        blinkTime = 0;
     }
 
     Quaternion GetRotate()

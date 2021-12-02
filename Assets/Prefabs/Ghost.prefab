@@ -63,6 +63,9 @@ MonoBehaviour:
   border: 25
   speed: 4
   startPosition: {x: 0, y: 0, z: 0}
+  attackCanvas:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &4711199149829419344
 PrefabInstance:
   m_ObjectHideFlags: 0

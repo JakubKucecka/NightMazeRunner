@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public PlayerRotation rotateControler;
     public GameObject night;
     public GameObject detector;
+    public List<Canvas> detectorCanvas = new List<Canvas>();
     public GameObject nightVisionGloves;
 
     [SerializeField]
@@ -106,6 +107,10 @@ public class Player : MonoBehaviour
             else if (detector != null && blinkTime < Time.time)
             {
                 detector.GetComponent<MeshRenderer>().material = greenMat;
+                foreach (var c in detectorCanvas)
+                {
+                    c.gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -230,11 +235,19 @@ public class Player : MonoBehaviour
         {
             isRed = false;
             detector.GetComponent<MeshRenderer>().material = greenMat;
+            foreach (var c in detectorCanvas)
+            {
+                c.gameObject.SetActive(false);
+            }
         }
         else
         {
             isRed = true;
             detector.GetComponent<MeshRenderer>().material = redMat;
+            foreach (var c in detectorCanvas)
+            {
+                c.gameObject.SetActive(true);
+            }
         }
     }
 }

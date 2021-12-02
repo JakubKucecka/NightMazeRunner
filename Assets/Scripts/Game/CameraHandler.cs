@@ -28,7 +28,7 @@ public class CameraHandler : MonoBehaviour
     {
         if (player == null) player = playerGO.GetComponent<Player>();
 
-        if (player.useNightVission)
+        if (player.useNightVission && player.energy > 0)
         {
             if (firstPersonCamera.enabled)
             {
@@ -61,7 +61,7 @@ public class CameraHandler : MonoBehaviour
             {
                 player.energyDecrease = (float)(player.energyDecreaseMax - (0.5 * glovesLevel));
                 nightVisionGloves.SetActive(true);
-                night.SetActive(false);
+                if (player.energy > 0) night.SetActive(false);
                 player.turnOffAllItemsWithout(2);
                 player.useItems = true;
                 player.useNightVission = true;

@@ -7,6 +7,12 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 8;
     public bool firstPerson;
 
+    public float sensitivity = 0.5f;
+    Vector2 rotation = Vector2.zero;
+    const string xAxis = "Mouse X";
+    const string yAxis = "Mouse Y";
+    public float yRotationLimit = 88f;
+
     public Vector3 startPositon;
     public Quaternion startRotation;
     public ButtonFunction buttonFunction;
@@ -47,12 +53,6 @@ public class PlayerMove : MonoBehaviour
         if (!Input.GetButton("MoveUp") && !Input.GetButton("MoveDown") && !Input.GetButton("MoveRight") && !Input.GetButton("MoveLeft")) buttonFunction.Idle();
     }
 
-    public float sensitivity = 1f;
-    Vector2 rotation = Vector2.zero;
-    const string xAxis = "Mouse X";
-    const string yAxis = "Mouse Y";
-    public float yRotationLimit = 88f;
-
     void OnGUI()
     {
         if (firstPerson)
@@ -60,8 +60,8 @@ public class PlayerMove : MonoBehaviour
             rotation.x += Input.GetAxis(xAxis) * sensitivity;
             rotation.y += Input.GetAxis(yAxis) * sensitivity;
             rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit*2);
-            var xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up);
-            var yQuat = Quaternion.AngleAxis(rotation.y, Vector3.right);
+            var xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up * Time.deltaTime);
+            var yQuat = Quaternion.AngleAxis(rotation.y, Vector3.right * Time.deltaTime);
 
             transform.localRotation = xQuat;
             bodyCamera.transform.localRotation = yQuat;

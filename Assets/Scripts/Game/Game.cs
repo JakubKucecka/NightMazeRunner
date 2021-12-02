@@ -34,6 +34,7 @@ public class Game : MonoBehaviour
 
     string dataPath;
     public JsonGameData gameData;
+    public List<GameObject> levels = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -187,9 +188,7 @@ public class Game : MonoBehaviour
 
         night.transform.localPosition = Vector3.zero;
 
-        GameObject[] levels = GameObject.FindGameObjectsWithTag("Level");
-
-        for (var i = 0; i < levels.Length; i++)
+        for (var i = 0; i < levels.Count; i++)
         {
             if (i == level - 1)
             {
@@ -202,6 +201,7 @@ public class Game : MonoBehaviour
         }
 
         itemSpawner.ReloadItems(itemsByLevels[level]);
+        ghost.speed = ghost.startSpeed + (1f * level);
     }
 
     public void unlockNext()
@@ -303,7 +303,7 @@ public class Game : MonoBehaviour
         {
             energy = 100;
             lives = 3;
-            coins = 0;
+            coins = 50;
             lightLevel = 1;
             gloves = false;
             glovesLevel = 1;
