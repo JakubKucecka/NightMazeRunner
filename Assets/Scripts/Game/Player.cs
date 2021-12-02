@@ -205,7 +205,6 @@ public class Player : MonoBehaviour
     float getDistanceOfGhosh()
     {
         float dist = Vector3.Distance(transform.position, ghost.transform.position);
-        Debug.Log(dist);
         return dist;
     }
 

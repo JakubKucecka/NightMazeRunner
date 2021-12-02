@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuGameSwitcher : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class MenuGameSwitcher : MonoBehaviour
             if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
             if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
             game.ResetGameData();
+            Invoke("CallShowHome", 5);
         }
 
         if (game.player.finish)
@@ -57,6 +59,11 @@ public class MenuGameSwitcher : MonoBehaviour
             if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
             if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
         }
+    }
+
+    void CallShowHome()
+    {
+        menu.ShowHome();   
     }
 
     public void startLevel(int level)
