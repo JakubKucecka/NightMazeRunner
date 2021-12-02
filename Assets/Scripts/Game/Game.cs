@@ -7,7 +7,8 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     public bool showMenu;
-    public int maxLevel = 3;
+    public int maxLevel;
+    public Canvas infoCanvas;
 
     [SerializeField]
     GameObject night;
@@ -39,6 +40,7 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxLevel = levels.Count;
         dataPath = Application.persistentDataPath + "/game_data.json";
         Debug.Log(dataPath);
         gameData = new JsonGameData();
@@ -74,11 +76,35 @@ public class Game : MonoBehaviour
         else
         {
             Cursor.visible = false;
-        }
 
-        if (Input.GetButtonDown("Restart"))
-        {
-            RestartGame();
+            if (Input.GetButtonDown("Restart"))
+            {
+                RestartGame();
+            }
+
+            if (Input.GetButtonDown("SwitchLight"))
+            {
+                player.changeUseLight();
+                infoCanvas.gameObject.SetActive(false);
+            }
+
+            if (Input.GetButtonDown("SwitchGloves"))
+            {
+                cameraHandler.changeUseGlasses();
+                infoCanvas.gameObject.SetActive(false);
+            }
+
+            if (Input.GetButtonDown("SwitchDetector"))
+            {
+                player.changeUseDetector();
+                infoCanvas.gameObject.SetActive(false);
+            }
+
+            if (Input.GetButtonDown("ChangeCameras"))
+            {
+                cameraHandler.changeCamera();
+                infoCanvas.gameObject.SetActive(false);
+            }
         }
 
         if (Input.GetButtonDown("BackToMenu"))
@@ -86,26 +112,6 @@ public class Game : MonoBehaviour
             if (player.useMiniMap) player.useMiniMap = false;
             RestartGame();
             showMenu = true;
-        }
-
-        if (Input.GetButtonDown("SwitchLight"))
-        {
-            player.changeUseLight();
-        }
-
-        if (Input.GetButtonDown("SwitchGloves"))
-        {
-            cameraHandler.changeUseGlasses();
-        }
-
-        if (Input.GetButtonDown("SwitchDetector"))
-        {
-            player.changeUseDetector();
-        }
-
-        if (Input.GetButtonDown("ChangeCameras"))
-        {
-            cameraHandler.changeCamera();
         }
 
         player.detectorLevel = gameData.detectorLevel;
@@ -185,6 +191,7 @@ public class Game : MonoBehaviour
         LoadGameDataFromJSON();
         ghost.ReloadGhost();
         player.RestartPlayer();
+        infoCanvas.gameObject.SetActive(true);
 
         night.transform.localPosition = Vector3.zero;
 
@@ -208,7 +215,7 @@ public class Game : MonoBehaviour
     {
         if (player.useMiniMap) player.useMiniMap = false;
 
-        if ( level < maxLevel)
+        if (level < maxLevel)
         {
             if (unlockedLevels.ContainsKey(level + 1))
             {
@@ -221,7 +228,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void GameOver()
+    public void ResetGameData()
     {
         gameData = new JsonGameData();
         string json = JsonUtility.ToJson(gameData);

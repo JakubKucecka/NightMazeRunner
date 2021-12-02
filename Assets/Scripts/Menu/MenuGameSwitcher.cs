@@ -38,17 +38,19 @@ public class MenuGameSwitcher : MonoBehaviour
         if (game.player.gameover)
         {
             game.player.gameover = false;
+            game.player.gameIsStarted = false;
             game.showMenu = true;
             menu.ShowCanvas(menu.gameoverCanvas);
             menuCamera.enabled = true;
             if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
             if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
-            game.GameOver();
+            game.ResetGameData();
         }
 
         if (game.player.finish)
         {
             game.player.finish = false;
+            game.player.gameIsStarted = false;
             game.showMenu = true;
             menu.ShowCanvas(menu.congratsCanvas);
             menuCamera.enabled = true;
@@ -79,6 +81,12 @@ public class MenuGameSwitcher : MonoBehaviour
         menuCamera.enabled = false;
         game.loadLevel();
         game.showMenu = false;
+    }
+
+    public void StartNewGame()
+    {
+        game.ResetGameData();
+        startLevel(1);
     }
 
     public void ExitApplication()

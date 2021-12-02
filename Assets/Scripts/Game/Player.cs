@@ -122,12 +122,11 @@ public class Player : MonoBehaviour
         moveControler.transform.position = moveControler.startPositon;
         moveControler.transform.rotation = moveControler.startRotation;
         rotateControler.transform.rotation = rotateControler.startRotation;
-        useLight = true;
         useMiniMap = false;
 
         foreach (var l in lights)
         {
-            l.enabled = true;
+            l.enabled = false;
         }
     }
 
