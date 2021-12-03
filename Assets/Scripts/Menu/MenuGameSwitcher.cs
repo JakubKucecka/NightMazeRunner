@@ -19,9 +19,9 @@ public class MenuGameSwitcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        game = gameGO.GetComponent<Game>();
         backgroundSound = GetComponent<AudioSource>();
         soundIsPlay = false;
+        game = gameGO.GetComponent<Game>();
     }
 
     // Update is called once per frame

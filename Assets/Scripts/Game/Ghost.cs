@@ -28,9 +28,21 @@ public class Ghost : MonoBehaviour
     int blinkCounter;
     bool attack;
 
+    AudioSource breathingSound;
+    AudioSource attackSound;
+    AudioSource screamSound;
+    bool IsBreathing;
     // Start is called before the first frame update
     void Start()
     {
+        var audioSources = GetComponents<AudioSource>();
+        foreach (var a in audioSources)
+        {
+            if (a.clip.name == "attack") attackSound = a;
+            if (a.clip.name == "zombi_breathing") breathingSound = a;
+            if (a.clip.name == "scream") screamSound = a;
+        }
+        IsBreathing = false;
         speed = startSpeed;
         startPosition = transform.position;
     }
@@ -40,6 +52,12 @@ public class Ghost : MonoBehaviour
     {
         if (player.gameIsStarted)
         {
+            if (!IsBreathing)
+            {
+                IsBreathing = true;
+                breathingSound.Play();
+            }
+
             if (changeDirTime <= Time.time)
             {
                 float nextTime = Random.Range(0.5f, 2f);
@@ -71,6 +89,13 @@ public class Ghost : MonoBehaviour
                 {
                     a.gameObject.SetActive(false);
                 }
+            }
+        } else
+        {
+            if (IsBreathing)
+            {
+                IsBreathing = false;
+                breathingSound.Stop();
             }
         }
     }
@@ -118,6 +143,8 @@ public class Ghost : MonoBehaviour
     {
         if (other.name == "Player")
         {
+            attackSound.Play();
+            screamSound.Play();
             player.GetLive();
             if (player.lives <= 0) player.gameover = true;
 

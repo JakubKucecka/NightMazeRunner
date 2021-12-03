@@ -19,9 +19,15 @@ public class PlayerMove : MonoBehaviour
 
     public Camera bodyCamera;
 
+    AudioSource stepSound;
+    bool isWalking;
+
     // Start is called before the first frame update
     void Start()
     {
+        stepSound = GetComponent<AudioSource>();
+        isWalking = false;
+
         startRotation = transform.rotation;
         startPositon = transform.position;
     }
@@ -50,7 +56,22 @@ public class PlayerMove : MonoBehaviour
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
         }
 
-        if (!Input.GetButton("MoveUp") && !Input.GetButton("MoveDown") && !Input.GetButton("MoveRight") && !Input.GetButton("MoveLeft")) buttonFunction.Idle();
+        if (!Input.GetButton("MoveUp") && !Input.GetButton("MoveDown") && !Input.GetButton("MoveRight") && !Input.GetButton("MoveLeft"))
+        {
+            buttonFunction.Idle();
+            if (isWalking)
+            {
+                isWalking = false;
+                stepSound.Stop();
+            }
+        } else
+        {
+            if (!isWalking)
+            {
+                isWalking = true;
+                stepSound.Play();
+            }
+        }
     }
 
     void OnGUI()

@@ -45,9 +45,17 @@ public class Player : MonoBehaviour
     float blinkTimeChange;
     bool isRed;
 
+    bool alarmPlay;
+    AudioSource alarmSound;
+
     // Start is called before the first frame update
     void Start()
     {
+        alarmPlay = false;
+        detector.SetActive(true);
+        alarmSound = detector.GetComponent<AudioSource>();
+        detector.SetActive(false);
+
         started = true;
         saveDistance = 30;
         blinkTime = 0;
@@ -234,6 +242,11 @@ public class Player : MonoBehaviour
         {
             isRed = false;
             detector.GetComponent<MeshRenderer>().material = greenMat;
+            if (alarmPlay)
+            {
+                alarmSound.Stop();
+                alarmPlay = false;
+            }
             foreach (var c in detectorCanvas)
             {
                 c.gameObject.SetActive(false);
@@ -243,6 +256,11 @@ public class Player : MonoBehaviour
         {
             isRed = true;
             detector.GetComponent<MeshRenderer>().material = redMat;
+            if (!alarmPlay)
+            {
+                alarmSound.Play();
+                alarmPlay = true;
+            }
             foreach (var c in detectorCanvas)
             {
                 c.gameObject.SetActive(true);

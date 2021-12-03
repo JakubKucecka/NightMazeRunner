@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     float rotationSpeed = 50;
+    public AudioSource pickUp;
 
     // Update is called once per frame
     void Update()
@@ -23,6 +24,7 @@ public class Item : MonoBehaviour
     {
         if (other.name == "Player")
         {
+            pickUp.Play();
             Destroy(gameObject);
         }
     }

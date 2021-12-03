@@ -7,6 +7,13 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField]
     GameObject player;
 
+    AudioSource pickUpSound;
+
+    private void Start()
+    {
+        pickUpSound = GetComponent<AudioSource>();
+    }
+
     // Start is called before the first frame update
     public void ReloadItems(Dictionary<GameObject, List<Vector3>> itemsPositions)
     {
@@ -28,6 +35,7 @@ public class ItemSpawner : MonoBehaviour
                 if (newItem.GetComponent<Detector>() != null) newItem.GetComponent<Detector>().player = player;
                 if (newItem.GetComponent<MiniMap>() != null) newItem.GetComponent<MiniMap>().player = player;
                 newItem.transform.position = i;
+                newItem.GetComponent<Item>().pickUp = pickUpSound;
             }
         }
     }
