@@ -13087,7 +13087,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Stla\u010Dte  [num1]\npre rozsvietenie baterky"
+  m_Text: "Stla\u010Dte  [1]\npre rozsvietenie baterky"
 --- !u!222 &1734467324
 CanvasRenderer:
   m_ObjectHideFlags: 0
