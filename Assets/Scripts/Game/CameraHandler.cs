@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,7 +60,7 @@ public class CameraHandler : MonoBehaviour
             // TODO: set player.energyDecrease from JSON
             if (player.gameItems["glasses"])
             {
-                player.energyDecrease = (float)(player.energyDecreaseMax - (0.5 * glovesLevel));
+                player.energyDecrease = (float)(player.energyMaxDecreaseGloves - Math.Pow(0.5, glovesLevel));
                 nightVisionGloves.SetActive(true);
                 if (player.energy > 0) night.SetActive(false);
                 player.turnOffAllItemsWithout(2);

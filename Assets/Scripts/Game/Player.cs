@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,9 @@ public class Player : MonoBehaviour
     public int lives;
     public float energy;
     public float energyDecrease;
-    public int energyDecreaseMax = 4;
+    public int energyMaxDecreaseLight = 4;
+    public int energyMaxDecreaseGloves = 6;
+    public int energyMaxDecreaseDetector = 2;
     public int lightLevel;
     public int detectorLevel;
     public float saveDistance;
@@ -62,7 +65,7 @@ public class Player : MonoBehaviour
         blinkTimeChange = 0.3f;
         isRed = false;
         useItems = false;
-        energyDecrease = energyDecreaseMax;
+        energyDecrease = energyMaxDecreaseLight;
         lightLevel = 1;
         detectorLevel = 1;
         useMiniMap = false;
@@ -155,7 +158,7 @@ public class Player : MonoBehaviour
 
     public void turnOnLight()
     {
-        energyDecrease = (float)(energyDecreaseMax - (0.5 * lightLevel));
+        energyDecrease = (float)(energyMaxDecreaseLight / Math.Pow(0.5, lightLevel));
         if (energy > 0)
         {
             useLight = true;
@@ -227,7 +230,7 @@ public class Player : MonoBehaviour
         {
             if (gameItems["detector"])
             {
-                energyDecrease = (float)(energyDecreaseMax - (0.5 * detectorLevel));
+                energyDecrease = (float)(energyMaxDecreaseDetector - Math.Pow(0.5, detectorLevel));
                 detector.SetActive(true);
                 turnOffAllItemsWithout(3);
                 useDetector = true;
