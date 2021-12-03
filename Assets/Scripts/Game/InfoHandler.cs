@@ -56,7 +56,7 @@ public class InfoHandler : MonoBehaviour
         if (player.lives > lives.Count)
         {
             var newLive = Instantiate(livePrefab, liveSpavner.transform);
-            newLive.transform.position += new Vector3(0, 0, lives.Count * 50 * gameObject.transform.localScale.z);
+            newLive.transform.position = new Vector3(0, 0, lives.Count * 100 * gameObject.transform.localScale.z);
             lives.Add(newLive);
         }
         else if (player.lives < lives.Count && player.lives > 0)
@@ -74,13 +74,14 @@ public class InfoHandler : MonoBehaviour
             if (game.level == 3)
             {
                 miniMap.sprite = level3;
-            } else if(game.level == 5)
+            }
+            else if (game.level == 5)
             {
                 miniMap.sprite = level5;
             }
 
             miniMap.gameObject.SetActive(player.useMiniMap);
-            playerMapPosition.transform.localPosition = 
+            playerMapPosition.transform.localPosition =
                 new Vector3(player.transform.position.z * 4.5f, -player.transform.position.x * 4.5f, playerMapPosition.transform.localPosition.z);
         }
 
@@ -88,11 +89,13 @@ public class InfoHandler : MonoBehaviour
         {
             energyText.text = $"{Math.Round(player.energy, 2)}%";
             energyWidth = player.energy * enegyMax / 100;
-        } else if (player.energy <= 0)
+        }
+        else if (player.energy <= 0)
         {
             energyText.text = "0%";
             energyWidth = 0;
-        } else if ( player.energy <= 100)
+        }
+        else if (player.energy <= 100)
         {
             energyText.text = "100%";
             energyWidth = 100;
