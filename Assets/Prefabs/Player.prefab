@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 174402503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children:
   - {fileID: 1787751885}
   - {fileID: 2066153128}
@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -895, y: -494}
+  m_AnchoredPosition: {x: -890, y: -460}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &174402506
@@ -181,7 +181,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499228937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.32944986}
+  m_LocalPosition: {x: 0, y: 0, z: 0.33}
   m_LocalScale: {x: 0.000353, y: 0.0003525, z: 0.000353}
   m_Children:
   - {fileID: 1857350655}
@@ -2394,7 +2394,9 @@ MonoBehaviour:
   lives: 3
   energy: 100
   energyDecrease: 2
-  energyDecreaseMax: 4
+  energyMaxDecreaseLight: 4
+  energyMaxDecreaseGloves: 6
+  energyMaxDecreaseDetector: 2
   lightLevel: 0
   detectorLevel: 0
   saveDistance: 0
