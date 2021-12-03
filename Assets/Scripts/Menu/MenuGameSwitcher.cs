@@ -14,10 +14,14 @@ public class MenuGameSwitcher : MonoBehaviour
     public Camera bodyCamera;
 
     public MenuHandler menu;
+    AudioSource backgroundSound;
+    bool soundIsPlay;
     // Start is called before the first frame update
     void Start()
     {
         game = gameGO.GetComponent<Game>();
+        backgroundSound = GetComponent<AudioSource>();
+        soundIsPlay = false;
     }
 
     // Update is called once per frame
@@ -25,11 +29,21 @@ public class MenuGameSwitcher : MonoBehaviour
     {
         if (!game.showMenu)
         {
+            if (soundIsPlay)
+            {
+                soundIsPlay = false;
+                backgroundSound.Stop();
+            }
             mainCamera.enabled = true;
             if (menuCamera != null && menuCamera.enabled) menuCamera.enabled = false;
         }
         else if (!menuCamera.enabled)
         {
+            if (!soundIsPlay)
+            {
+                soundIsPlay = true;
+                backgroundSound.Play();
+            }
             menuCamera.enabled = true;
             if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
             if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
