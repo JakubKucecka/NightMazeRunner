@@ -16,6 +16,8 @@ public class Ghost : MonoBehaviour
     float changeDirTime = 0;
     Vector3 dir;
     Quaternion rotate;
+    Quaternion startRotation;
+    Quaternion childStartRotation;
 
     Vector3 up = new Vector3(1, 0, 0);
     Vector3 down = new Vector3(-1, 0, 0);
@@ -32,9 +34,14 @@ public class Ghost : MonoBehaviour
     AudioSource attackSound;
     AudioSource screamSound;
     bool IsBreathing;
+
+    public Vector3 bonePosition;
+    public bool goForBone;
     // Start is called before the first frame update
     void Start()
     {
+        goForBone = false;
+
         var audioSources = GetComponents<AudioSource>();
         foreach (var a in audioSources)
         {
@@ -45,11 +52,20 @@ public class Ghost : MonoBehaviour
         IsBreathing = false;
         speed = startSpeed;
         startPosition = transform.position;
+        startRotation = transform.rotation;
+        childStartRotation = transform.GetChild(0).transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (bonePosition != null && Vector3.Distance(transform.position, bonePosition) < 5)
+        {
+            goForBone = false;
+            transform.rotation = startRotation;
+            transform.GetChild(0).transform.rotation = childStartRotation;
+        }
+
         if (player.gameIsStarted)
         {
             if (!IsBreathing)
@@ -90,30 +106,43 @@ public class Ghost : MonoBehaviour
                     a.gameObject.SetActive(false);
                 }
             }
-        } else
+        }
+        else
         {
             if (IsBreathing)
             {
                 IsBreathing = false;
                 breathingSound.Stop();
             }
+            goForBone = false;
+            transform.rotation = startRotation;
+            transform.GetChild(0).transform.rotation = childStartRotation;
         }
     }
 
     public void GetDir()
     {
-        List<Vector3> dirs = new List<Vector3>();
+        if (!goForBone)
+        {
+            List<Vector3> dirs = new List<Vector3>();
 
-        if (transform.position.x + 3 <= border) dirs.Add(down);
-        if (transform.position.x - 3 >= -1 * border) dirs.Add(up);
-        if (transform.position.z + 3 <= border) dirs.Add(right);
-        if (transform.position.z - 3 >= -1 * border) dirs.Add(left);
+            if (transform.position.x + 3 <= border) dirs.Add(down);
+            if (transform.position.x - 3 >= -1 * border) dirs.Add(up);
+            if (transform.position.z + 3 <= border) dirs.Add(right);
+            if (transform.position.z - 3 >= -1 * border) dirs.Add(left);
 
-        dirs = getPlayerPosition(dirs);
+            dirs = getPlayerPosition(dirs);
 
-        int index = Random.Range(0, dirs.Count);
-        dir = dirs[index];
-        rotate = GetRotate();
+            int index = Random.Range(0, dirs.Count);
+            dir = dirs[index];
+            rotate = GetRotate();
+        }
+        else
+        {
+            transform.LookAt(new Vector3(bonePosition.x, transform.position.y, bonePosition.z));
+            rotate = Quaternion.Inverse(Quaternion.identity);
+            dir = Vector3.forward * speed;
+        }
     }
 
     private List<Vector3> getPlayerPosition(List<Vector3> dirs)

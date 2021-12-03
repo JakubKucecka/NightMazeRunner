@@ -184,6 +184,44 @@ public class Game : MonoBehaviour
 
         itemsByLevels.Add(3, levelPositions);
         levelPositions = new Dictionary<GameObject, List<Vector3>>();
+
+        // level 4
+        levelPositions.Add(coinPrefab, new List<Vector3>());
+        levelPositions[coinPrefab].Add(new Vector3(25f, 6f, 25f));
+        levelPositions[coinPrefab].Add(new Vector3(-15f, 6f, 5f));
+        levelPositions[coinPrefab].Add(new Vector3(-5f, 6f, -25f));
+        levelPositions[coinPrefab].Add(new Vector3(5f, 6f, 5f));
+        levelPositions[coinPrefab].Add(new Vector3(5f, 6f, 25f));
+        levelPositions[coinPrefab].Add(new Vector3(15f, 6f, -5f));
+        levelPositions[coinPrefab].Add(new Vector3(25f, 6f, -15f));
+
+        levelPositions.Add(batteryPrefab, new List<Vector3>());
+        levelPositions[batteryPrefab].Add(new Vector3(-5f, 6f, 15f));
+        levelPositions[batteryPrefab].Add(new Vector3(-25f, 6f, -25f));
+        levelPositions[batteryPrefab].Add(new Vector3(15f, 6f, -25f));
+
+        itemsByLevels.Add(4, levelPositions);
+        levelPositions = new Dictionary<GameObject, List<Vector3>>();
+
+        // level 5
+        levelPositions.Add(coinPrefab, new List<Vector3>());
+        levelPositions[coinPrefab].Add(new Vector3(-25f, 6f, -15f));
+        levelPositions[coinPrefab].Add(new Vector3(-25f, 6f, 5f));
+        levelPositions[coinPrefab].Add(new Vector3(-15f, 6f, -25f));
+        levelPositions[coinPrefab].Add(new Vector3(-15f, 6f, 25f));
+        levelPositions[coinPrefab].Add(new Vector3(-5f, 6f, 5f));
+        levelPositions[coinPrefab].Add(new Vector3(25f, 6f, 25f));
+
+        levelPositions.Add(batteryPrefab, new List<Vector3>());
+        levelPositions[batteryPrefab].Add(new Vector3(5f, 6f, -15f));
+        levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, 15f));
+        levelPositions[batteryPrefab].Add(new Vector3(25f, 6f, -5f));
+
+        levelPositions.Add(mapPrefab, new List<Vector3>());
+        levelPositions[mapPrefab].Add(new Vector3(25f, 6f, 15f));
+
+        itemsByLevels.Add(5, levelPositions);
+        levelPositions = new Dictionary<GameObject, List<Vector3>>();
     }
 
     public void loadLevel()

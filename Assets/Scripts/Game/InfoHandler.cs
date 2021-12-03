@@ -6,7 +6,10 @@ using UnityEngine.UI;
 
 public class InfoHandler : MonoBehaviour
 {
-    public Player player;
+    [SerializeField]
+    Player player;
+    [SerializeField]
+    Game game;
     [SerializeField]
     GameObject livePrefab;
 
@@ -25,6 +28,10 @@ public class InfoHandler : MonoBehaviour
 
     [SerializeField]
     Image miniMap;
+    [SerializeField]
+    Sprite level3;
+    [SerializeField]
+    Sprite level5;
     [SerializeField]
     Image playerMapPosition;
 
@@ -64,6 +71,14 @@ public class InfoHandler : MonoBehaviour
         gloves.SetActive(player.gameItems != null && player.gameItems["glasses"]);
         if (miniMap != null)
         {
+            if (game.level == 3)
+            {
+                miniMap.sprite = level3;
+            } else if(game.level == 5)
+            {
+                miniMap.sprite = level5;
+            }
+
             miniMap.gameObject.SetActive(player.useMiniMap);
             playerMapPosition.transform.localPosition = 
                 new Vector3(player.transform.position.z * 4.5f, -player.transform.position.x * 4.5f, playerMapPosition.transform.localPosition.z);

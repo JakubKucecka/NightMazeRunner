@@ -16,6 +16,8 @@ public class MenuGameSwitcher : MonoBehaviour
     public MenuHandler menu;
     AudioSource backgroundSound;
     bool soundIsPlay;
+
+    private bool newGameCounter = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -102,12 +104,18 @@ public class MenuGameSwitcher : MonoBehaviour
         menuCamera.enabled = false;
         game.loadLevel();
         game.showMenu = false;
+        newGameCounter = false;
     }
 
     public void StartNewGame()
     {
-        game.ResetGameData();
-        startLevel(1);
+        if (newGameCounter)
+        {
+            newGameCounter = false;
+            game.ResetGameData();
+            startLevel(1);
+        }
+        newGameCounter = true;
     }
 
     public void ExitApplication()
