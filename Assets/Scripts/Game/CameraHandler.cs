@@ -5,20 +5,26 @@ using UnityEngine;
 
 public class CameraHandler : MonoBehaviour
 {
-    public GameObject playerGO;
-    public Camera firstPersonCamera;
-    public Camera overheadCamera;
-
-    public GameObject night;
-    public GameObject nightVisionGloves;
-    public GameObject globalNightVission;
-    public GameObject playerNightVission;
-
-    public int glovesLevel;
-
+    [SerializeField]
     Player player;
-    PlayerMove moveControler;
-    PlayerRotation rotateControler;
+    private PlayerMove moveControler;
+    private PlayerRotation rotateControler;
+
+    [SerializeField]
+    Camera firstPersonCamera;
+    [SerializeField]
+    Camera overheadCamera;
+
+    [SerializeField]
+    GameObject night;
+    [SerializeField]
+    GameObject nightVisionGloves;
+    [SerializeField]
+    GameObject globalNightVission;
+    [SerializeField]
+    GameObject playerNightVission;
+
+    public int nightVissionLevel;
 
     private void Start()
     {
@@ -27,8 +33,6 @@ public class CameraHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player == null) player = playerGO.GetComponent<Player>();
-
         if (player.useNightVission && player.energy > 0)
         {
             if (firstPersonCamera.enabled)
@@ -49,7 +53,7 @@ public class CameraHandler : MonoBehaviour
         }
     }
 
-    public void changeUseGlasses()
+    public void changeUseNightVission()
     {
         if (player.useNightVission)
         {
@@ -58,9 +62,9 @@ public class CameraHandler : MonoBehaviour
         else
         {
             // TODO: set player.energyDecrease from JSON
-            if (player.gameItems["glasses"])
+            if (player.gameItems["nightVission"])
             {
-                player.energyDecrease = (float)(player.energyMaxDecreaseGloves * Math.Pow(0.4, glovesLevel - 1));
+                player.energyDecrease = (float)(player.energyMaxDecreaseGloves * Math.Pow(0.4, nightVissionLevel - 1));
                 nightVisionGloves.SetActive(true);
                 if (player.energy > 0) night.SetActive(false);
                 player.turnOffAllItemsWithout(2);

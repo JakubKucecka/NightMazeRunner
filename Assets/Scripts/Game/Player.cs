@@ -194,7 +194,7 @@ public class Player : MonoBehaviour
     }
 
     // 1 - light
-    // 2 - glasses
+    // 2 - nightVission
     // 3 - detector
     public void turnOffAllItemsWithout(int without)
     {

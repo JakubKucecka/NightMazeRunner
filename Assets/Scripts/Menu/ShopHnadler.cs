@@ -9,7 +9,7 @@ public class ShopHnadler : MonoBehaviour
     Game game;
 
     [SerializeField]
-    GameObject gloves;
+    GameObject nightVission;
     [SerializeField]
     GameObject detector;
 
@@ -18,7 +18,7 @@ public class ShopHnadler : MonoBehaviour
     [SerializeField]
     Text batteryText;
     [SerializeField]
-    Text glovesText;
+    Text nightVissionText;
     [SerializeField]
     Text detectorText;
 
@@ -27,33 +27,33 @@ public class ShopHnadler : MonoBehaviour
     [SerializeField]
     Button batteryButton;
     [SerializeField]
-    Button glovesButton;
+    Button nightVissionButton;
     [SerializeField]
     Button detectorButton;
 
     public int livesPrice = 50;
     public int batteryPrice = 20;
-    public int glovesPrice = 500;
+    public int nightVissionPrice = 500;
     public int detectorPrice = 500;
     public int maxLives = 6;
 
     // Update is called once per frame
     void Update()
     {
-        gloves.SetActive(!game.gameData.gloves);
+        nightVission.SetActive(!game.gameData.nightVission);
         detector.SetActive(!game.gameData.detector);
 
         livesText.text = livesPrice + "";
         batteryText.text = batteryPrice + "";
-        glovesText.text = glovesPrice + "";
+        nightVissionText.text = nightVissionPrice + "";
         detectorText.text = detectorPrice + "";
 
         livesButton.interactable = CheckCoins(livesPrice) && game.player.lives < maxLives;
         livesButton.GetComponentInChildren<Text>().enabled = CheckCoins(livesPrice) && game.player.lives < maxLives;
         batteryButton.interactable = CheckCoins(batteryPrice) && game.player.energy < 100;
         batteryButton.GetComponentInChildren<Text>().enabled = CheckCoins(batteryPrice) && game.player.energy < 100;
-        glovesButton.interactable = CheckCoins(glovesPrice);
-        glovesButton.GetComponentInChildren<Text>().enabled = CheckCoins(glovesPrice);
+        nightVissionButton.interactable = CheckCoins(nightVissionPrice);
+        nightVissionButton.GetComponentInChildren<Text>().enabled = CheckCoins(nightVissionPrice);
         detectorButton.interactable = CheckCoins(detectorPrice);
         detectorButton.GetComponentInChildren<Text>().enabled = CheckCoins(detectorPrice);
     }
@@ -78,12 +78,12 @@ public class ShopHnadler : MonoBehaviour
         }
     }
 
-    public void buyGloves()
+    public void buyNightVission()
     {
-        if (CheckCoins(glovesPrice))
+        if (CheckCoins(nightVissionPrice))
         {
-            game.player.coins -= glovesPrice / 10;
-            game.player.gameItems["glasses"] = true;
+            game.player.coins -= nightVissionPrice / 10;
+            game.player.gameItems["nightVission"] = true;
             game.SaveGameDataToJSON();
         }
     }

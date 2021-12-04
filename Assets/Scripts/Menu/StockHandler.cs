@@ -9,34 +9,34 @@ public class StockHandler : MonoBehaviour
     Game game;
 
     [SerializeField]
-    GameObject gloves;
+    GameObject nightVission;
     [SerializeField]
     GameObject detector;
 
     [SerializeField]
     Text lightText;
     [SerializeField]
-    Text glovesText;
+    Text nightVissionText;
     [SerializeField]
     Text detectorText;
 
     [SerializeField]
     Text lightLevelText;
     [SerializeField]
-    Text glovesLevelText;
+    Text nightVissionLevelText;
     [SerializeField]
     Text detectorLevelText;
 
     [SerializeField]
     Button lightButton;
     [SerializeField]
-    Button glovesButton;
+    Button nightVissionButton;
     [SerializeField]
     Button detectorButton;
 
     public int price = 100;
     public int lightPrice;
-    public int glovesPrice;
+    public int nightVissionPrice;
     public int detectorPrice;
 
     private int maxLevel = 5;
@@ -44,25 +44,25 @@ public class StockHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gloves.SetActive(game.gameData.gloves);
+        nightVission.SetActive(game.gameData.nightVission);
         detector.SetActive(game.gameData.detector);
 
         lightPrice = price * (game.gameData.lightLevel + 1);
-        glovesPrice = price * (game.gameData.glovesLevel + 1);
+        nightVissionPrice = price * (game.gameData.nightVissionLevel + 1);
         detectorPrice = price * (game.gameData.detectorLevel + 1);
 
         lightText.text = lightPrice + "";
-        glovesText.text = glovesPrice + "";
+        nightVissionText.text = nightVissionPrice + "";
         detectorText.text = detectorPrice + "";
 
         lightLevelText.text = "LEVEL: " + game.gameData.lightLevel;
-        glovesLevelText.text = "LEVEL: " + game.gameData.glovesLevel;
+        nightVissionLevelText.text = "LEVEL: " + game.gameData.nightVissionLevel;
         detectorLevelText.text = "LEVEL: " + game.gameData.detectorLevel;
 
         lightButton.interactable = CheckCoins(lightPrice) && game.gameData.lightLevel < maxLevel;
         lightButton.GetComponentInChildren<Text>().enabled = CheckCoins(lightPrice) && game.gameData.lightLevel < maxLevel;
-        glovesButton.interactable = CheckCoins(glovesPrice) && game.gameData.glovesLevel < maxLevel;
-        glovesButton.GetComponentInChildren<Text>().enabled = CheckCoins(glovesPrice) && game.gameData.glovesLevel < maxLevel;
+        nightVissionButton.interactable = CheckCoins(nightVissionPrice) && game.gameData.nightVissionLevel < maxLevel;
+        nightVissionButton.GetComponentInChildren<Text>().enabled = CheckCoins(nightVissionPrice) && game.gameData.nightVissionLevel < maxLevel;
         detectorButton.interactable = CheckCoins(detectorPrice) && game.gameData.detectorLevel < maxLevel;
         detectorButton.GetComponentInChildren<Text>().enabled = CheckCoins(detectorPrice) && game.gameData.detectorLevel < maxLevel;
     }
@@ -77,12 +77,12 @@ public class StockHandler : MonoBehaviour
         }
     }
 
-    public void updateGloves()
+    public void updatenightVission()
     {
-        if (CheckCoins(glovesPrice) && game.gameData.glovesLevel < maxLevel)
+        if (CheckCoins(nightVissionPrice) && game.gameData.nightVissionLevel < maxLevel)
         {
-            game.player.coins -= glovesPrice / 10;
-            game.gameData.glovesLevel += 1;
+            game.player.coins -= nightVissionPrice / 10;
+            game.gameData.nightVissionLevel += 1;
             game.SaveGameDataToJSON();
         }
     }

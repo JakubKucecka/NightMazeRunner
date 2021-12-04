@@ -15,7 +15,7 @@ public class NightVision : MonoBehaviour
     {
         if (other.name == "Player")
         {
-            player.GetComponent<Player>().gameItems["glasses"] = true;
+            player.GetComponent<Player>().gameItems["nightVission"] = true;
         }
     }
 }

@@ -22,7 +22,7 @@ public class InfoHandler : MonoBehaviour
     [SerializeField]
     Text coins;
     [SerializeField]
-    GameObject gloves;
+    GameObject nightVission;
     [SerializeField]
     GameObject detector;
 
@@ -68,7 +68,7 @@ public class InfoHandler : MonoBehaviour
         coins.text = $"{player.coins * 10}";
 
         detector.SetActive(player.gameItems != null && player.gameItems["detector"]);
-        gloves.SetActive(player.gameItems != null && player.gameItems["glasses"]);
+        nightVission.SetActive(player.gameItems != null && player.gameItems["nightVission"]);
         if (miniMap != null)
         {
             if (game.level == 3)

@@ -30,7 +30,7 @@ public class Game : MonoBehaviour
     // prefabs ganme items
     public GameObject batteryPrefab;
     public GameObject coinPrefab;
-    public GameObject glassPrefab;
+    public GameObject nightVissionPrefab;
     public GameObject detectorPrefab;
     public GameObject mapPrefab;
 
@@ -88,9 +88,9 @@ public class Game : MonoBehaviour
                 infoCanvas.gameObject.SetActive(false);
             }
 
-            if (Input.GetButtonDown("SwitchGloves"))
+            if (Input.GetButtonDown("SwitchNightVission"))
             {
-                cameraHandler.changeUseGlasses();
+                cameraHandler.changeUseNightVission();
                 infoCanvas.gameObject.SetActive(false);
             }
 
@@ -116,7 +116,7 @@ public class Game : MonoBehaviour
 
         player.detectorLevel = gameData.detectorLevel;
         player.lightLevel = gameData.lightLevel;
-        cameraHandler.glovesLevel = gameData.glovesLevel;
+        cameraHandler.nightVissionLevel = gameData.nightVissionLevel;
     }
 
     public void RestartGame()
@@ -141,8 +141,8 @@ public class Game : MonoBehaviour
         levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, 25f));
         levelPositions[batteryPrefab].Add(new Vector3(5f, 6f, -5f));
 
-        levelPositions.Add(glassPrefab, new List<Vector3>());
-        levelPositions[glassPrefab].Add(new Vector3(-5f, 6f, -25f));
+        levelPositions.Add(nightVissionPrefab, new List<Vector3>());
+        levelPositions[nightVissionPrefab].Add(new Vector3(-5f, 6f, -25f));
 
         itemsByLevels.Add(1, levelPositions);
         levelPositions = new Dictionary<GameObject, List<Vector3>>();
@@ -288,7 +288,7 @@ public class Game : MonoBehaviour
         }
 
         player.gameItems = new Dictionary<string, bool>();
-        player.gameItems.Add("glasses", gameData.gloves);
+        player.gameItems.Add("nightVission", gameData.nightVission);
         player.gameItems.Add("detector", gameData.detector);
 
         player.lives = gameData.lives;
@@ -306,7 +306,7 @@ public class Game : MonoBehaviour
 
         gameData.unlockLevels = tmpLevels.ToArray();
 
-        gameData.gloves = player.gameItems["glasses"];
+        gameData.nightVission = player.gameItems["nightVission"];
         gameData.detector = player.gameItems["detector"];
 
         gameData.lives = player.lives;
@@ -338,20 +338,20 @@ public class Game : MonoBehaviour
         public int lives;
         public int coins;
         public int lightLevel;
-        public bool gloves;
-        public int glovesLevel;
+        public bool nightVission;
+        public int nightVissionLevel;
         public bool detector;
         public int detectorLevel;
         public int[] unlockLevels;
 
-        public JsonGameData(float iEnergy, int iLives, int iCoins, int iLightLevel, bool iGloves, int iGlovesLevel, bool iDetector, int iDetectorLevel, int[] iUnlockLevels)
+        public JsonGameData(float iEnergy, int iLives, int iCoins, int iLightLevel, bool iNightVission, int iNightVissionLevel, bool iDetector, int iDetectorLevel, int[] iUnlockLevels)
         {
             energy = iEnergy;
             lives = iLives;
             coins = iCoins;
             lightLevel = iLightLevel;
-            gloves = iGloves;
-            glovesLevel = iGlovesLevel;
+            nightVission = iNightVission;
+            nightVissionLevel = iNightVissionLevel;
             detector = iDetector;
             detectorLevel = iDetectorLevel;
             unlockLevels = iUnlockLevels;
@@ -360,11 +360,11 @@ public class Game : MonoBehaviour
         public JsonGameData()
         {
             energy = 100;
-            lives = 3;
+            lives = 5;
             coins = 50;
             lightLevel = 1;
-            gloves = false;
-            glovesLevel = 1;
+            nightVission = false;
+            nightVissionLevel = 1;
             detector = false;
             detectorLevel = 1;
             unlockLevels = new int[] { 1 };
