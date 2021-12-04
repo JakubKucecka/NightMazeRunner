@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class StockHandler : MonoBehaviour
 {
+
+    public int price = 100;
+    public int lightPrice;
+    public int nightVissionPrice;
+    public int detectorPrice;
+
     [SerializeField]
     Game game;
 
@@ -33,11 +39,6 @@ public class StockHandler : MonoBehaviour
     Button nightVissionButton;
     [SerializeField]
     Button detectorButton;
-
-    public int price = 100;
-    public int lightPrice;
-    public int nightVissionPrice;
-    public int detectorPrice;
 
     private int maxLevel = 5;
 

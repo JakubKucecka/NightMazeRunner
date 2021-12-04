@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class MenuHandler : MonoBehaviour
 {
-    public List<Canvas> menuCanvases;
     public Canvas gameoverCanvas;
     public Canvas congratsCanvas;
 
-    AudioSource buttonHover;
-    public Game game;
+    [SerializeField]
+    Game game;
+    [SerializeField]
+    List<Canvas> menuCanvases;
+
+    private AudioSource buttonHover;
+
     // Start is called before the first frame update
     void Start()
     {

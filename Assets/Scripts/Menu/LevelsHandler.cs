@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class LevelsHandler : MonoBehaviour
 {
     [SerializeField]
-    GameObject gameGO;
+    Game game;
 
     public void showLevels()
     {
-        Game game = gameGO.GetComponent<Game>();
         var levelsButtons = GetComponentsInChildren<Button>();
 
         for (var i = 0; i < levelsButtons.Length-1; i++)

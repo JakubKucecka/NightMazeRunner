@@ -6,24 +6,27 @@ using UnityEngine.UI;
 public class MenuGameSwitcher : MonoBehaviour
 {
     [SerializeField]
-    GameObject gameGO;
+    MenuHandler menu;
+
+    [SerializeField]
     Game game;
+    [SerializeField]
+    Camera menuCamera;
+    [SerializeField]
+    Camera mainCamera;
+    [SerializeField]
+    Camera bodyCamera;
 
-    public Camera menuCamera;
-    public Camera mainCamera;
-    public Camera bodyCamera;
-
-    public MenuHandler menu;
-    AudioSource backgroundSound;
-    bool soundIsPlay;
+    private AudioSource backgroundSound;
+    private bool soundIsPlay;
 
     private bool newGameCounter = false;
+
     // Start is called before the first frame update
     void Start()
     {
         backgroundSound = GetComponent<AudioSource>();
         soundIsPlay = false;
-        game = gameGO.GetComponent<Game>();
     }
 
     // Update is called once per frame
@@ -79,7 +82,7 @@ public class MenuGameSwitcher : MonoBehaviour
 
     void CallShowHome()
     {
-        menu.ShowHome();   
+        menu.ShowHome();
     }
 
     public void startLevel(int level)
@@ -89,7 +92,7 @@ public class MenuGameSwitcher : MonoBehaviour
             int lastLevel = 0;
             foreach (var l in game.unlockedLevels)
             {
-                if(l.Value && l.Key > lastLevel)
+                if (l.Value && l.Key > lastLevel)
                 {
                     lastLevel = l.Key;
                 }

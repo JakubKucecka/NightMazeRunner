@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public class ShopHnadler : MonoBehaviour
 {
+
+    public int livesPrice = 50;
+    public int batteryPrice = 20;
+    public int nightVissionPrice = 500;
+    public int detectorPrice = 500;
+    public int maxLives = 6;
+
     [SerializeField]
     Game game;
 
@@ -30,12 +37,6 @@ public class ShopHnadler : MonoBehaviour
     Button nightVissionButton;
     [SerializeField]
     Button detectorButton;
-
-    public int livesPrice = 50;
-    public int batteryPrice = 20;
-    public int nightVissionPrice = 500;
-    public int detectorPrice = 500;
-    public int maxLives = 6;
 
     // Update is called once per frame
     void Update()
