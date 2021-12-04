@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
 
     public void turnOnLight()
     {
-        energyDecrease = (float)(energyMaxDecreaseLight / Math.Pow(0.5, lightLevel));
+        energyDecrease = (float)(energyMaxDecreaseLight * Math.Pow(0.4, lightLevel - 1));
         if (energy > 0)
         {
             useLight = true;
@@ -230,7 +230,7 @@ public class Player : MonoBehaviour
         {
             if (gameItems["detector"])
             {
-                energyDecrease = (float)(energyMaxDecreaseDetector - Math.Pow(0.5, detectorLevel));
+                energyDecrease = (float)(energyMaxDecreaseDetector * Math.Pow(0.4, detectorLevel - 1));
                 detector.SetActive(true);
                 turnOffAllItemsWithout(3);
                 useDetector = true;

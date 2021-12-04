@@ -82,7 +82,7 @@ public class ShopHnadler : MonoBehaviour
         if (CheckCoins(glovesPrice))
         {
             game.player.coins -= glovesPrice / 10;
-            game.gameData.gloves = true;
+            game.player.gameItems["glasses"] = true;
             game.SaveGameDataToJSON();
         }
     }
@@ -92,7 +92,7 @@ public class ShopHnadler : MonoBehaviour
         if (CheckCoins(detectorPrice))
         {
             game.player.coins -= detectorPrice / 10;
-            game.gameData.detector = true;
+            game.player.gameItems["detector"] = true;
             game.SaveGameDataToJSON();
         }
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -41,7 +42,7 @@ public class Game : MonoBehaviour
     void Start()
     {
         maxLevel = levels.Count;
-        dataPath = Application.persistentDataPath + "/game_data.json";
+        dataPath = Application.persistentDataPath + "/game_data";
         gameData = new JsonGameData();
         loadLevelItems();
 
@@ -277,8 +278,7 @@ public class Game : MonoBehaviour
     {
         if (File.Exists(dataPath))
         {
-            string json = File.ReadAllText(dataPath);
-            gameData = JsonUtility.FromJson<JsonGameData>(json);
+            gameData = JsonUtility.FromJson<JsonGameData>(Deobfuscate(dataPath));
         }
 
         unlockedLevels = new Dictionary<int, bool>();
@@ -314,7 +314,21 @@ public class Game : MonoBehaviour
         gameData.coins = player.coins;
 
         string json = JsonUtility.ToJson(gameData);
-        File.WriteAllText(dataPath, json);
+        Obfuscate(dataPath, json);
+    }
+
+    void Obfuscate(string fileName, string data)
+    {
+        var bytes = Encoding.UTF8.GetBytes(data);
+        for (int i = 0; i < bytes.Length; i++) bytes[i] ^= 0x5a;
+        File.WriteAllText(fileName, Convert.ToBase64String(bytes));
+    }
+
+    string Deobfuscate(string fileName)
+    {
+        var bytes = Convert.FromBase64String(File.ReadAllText(fileName));
+        for (int i = 0; i < bytes.Length; i++) bytes[i] ^= 0x5a;
+        return Encoding.UTF8.GetString(bytes);
     }
 
     [Serializable]

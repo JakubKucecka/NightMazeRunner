@@ -25,7 +25,6 @@ public class Item : MonoBehaviour
     {
         if (player.gameIsStarted && other.name == "Player")
         {
-            Debug.Log("play");
             pickUp.Play();
             Destroy(gameObject);
         }
