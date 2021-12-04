@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public GameObject player;
-
-    private void Start()
-    {
-        
-    }
+    public Player player;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
         {
-            player.GetComponent<Player>().coins += 2;
+            player.coins += 2;
         }
     }
 }

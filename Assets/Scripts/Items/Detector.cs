@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class Detector : MonoBehaviour
 {
-    public GameObject player;
-
-    private void Start()
-    {
-
-    }
+    public Player player;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
         {
-            player.GetComponent<Player>().gameItems["detector"] = true;
+            player.gameItems["detector"] = true;
         }
     }
 }

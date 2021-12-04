@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MiniMap : MonoBehaviour
 {
-    public GameObject player;
+    public Player player;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
         {
-            player.GetComponent<Player>().useMiniMap = true;
+            player.useMiniMap = true;
         }
     }
 }

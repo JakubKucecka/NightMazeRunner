@@ -5,9 +5,9 @@ using UnityEngine;
 public class ItemSpawner : MonoBehaviour
 {
     [SerializeField]
-    GameObject player;
+    Player player;
 
-    AudioSource pickUpSound;
+    private AudioSource pickUpSound;
 
     private void Start()
     {
@@ -36,7 +36,7 @@ public class ItemSpawner : MonoBehaviour
                 if (newItem.GetComponent<MiniMap>() != null) newItem.GetComponent<MiniMap>().player = player;
                 newItem.transform.position = i;
                 newItem.GetComponent<Item>().pickUp = pickUpSound;
-                newItem.GetComponent<Item>().player = player.GetComponent<Player>();
+                newItem.GetComponent<Item>().player = player;
             }
         }
     }

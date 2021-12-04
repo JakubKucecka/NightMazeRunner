@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class NightVision : MonoBehaviour
 {
-    public GameObject player;
-
-    private void Start()
-    {
-
-    }
+    public Player player;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
         {
-            player.GetComponent<Player>().gameItems["nightVission"] = true;
+            player.gameItems["nightVission"] = true;
         }
     }
 }

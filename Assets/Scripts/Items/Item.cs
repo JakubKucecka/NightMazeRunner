@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    float rotationSpeed = 50;
     public Player player;
     public AudioSource pickUp;
+
+    private float rotationSpeed = 50;
 
     // Update is called once per frame
     void Update()
