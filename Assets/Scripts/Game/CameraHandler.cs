@@ -84,6 +84,8 @@ public class CameraHandler : MonoBehaviour
 
             moveControler.firstPerson = false;
             rotateControler.firstPerson = false;
+
+            moveControler.transform.rotation = moveControler.startRotation;
         }
         else
         {

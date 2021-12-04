@@ -31,11 +31,13 @@ public class Player : MonoBehaviour
 
     public PlayerMove moveControler;
     public PlayerRotation rotateControler;
-    public GameObject night;
     public GameObject detector;
-    public List<Canvas> detectorCanvas = new List<Canvas>();
     public GameObject nightVisionGloves;
 
+    [SerializeField]
+    List<Canvas> detectorCanvas = new List<Canvas>();
+    [SerializeField]
+    GameObject night;
     [SerializeField]
     GameObject ghost;
     [SerializeField]
@@ -43,13 +45,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     Material greenMat;
 
-    Light[] lights;
-    float blinkTime;
-    float blinkTimeChange;
-    bool isRed;
+    private Light[] lights;
+    private float blinkTime;
+    private float blinkTimeChange;
+    private bool isRed;
 
-    bool alarmPlay;
-    AudioSource alarmSound;
+    private bool alarmPlay;
+    private AudioSource alarmSound;
 
     // Start is called before the first frame update
     void Start()
@@ -69,9 +71,6 @@ public class Player : MonoBehaviour
         lightLevel = 1;
         detectorLevel = 1;
         useMiniMap = false;
-
-        moveControler = GetComponentInChildren<PlayerMove>();
-        rotateControler = GetComponentInChildren<PlayerRotation>();
 
         lights = GetComponentsInChildren<Light>();
     }

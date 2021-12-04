@@ -7311,6 +7311,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57bd9e5b39ff8fc4dbda9242c72077b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &951271160 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8321825776209322740, guid: 019b36d1369a57441954fe5aa22e9bbf, type: 3}
+  m_PrefabInstance: {fileID: 8732998600788257870}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951271154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c407b1828302894c81b7a76fca6fc29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -14246,6 +14257,17 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 1857350660, guid: 019b36d1369a57441954fe5aa22e9bbf, type: 3}
   m_PrefabInstance: {fileID: 8732998600788257870}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1858385143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6582862330282054070, guid: 019b36d1369a57441954fe5aa22e9bbf, type: 3}
+  m_PrefabInstance: {fileID: 8732998600788257870}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad6407e515629a4f96cf99079713864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1862963205
 GameObject:
   m_ObjectHideFlags: 0
@@ -16827,6 +16849,14 @@ PrefabInstance:
       propertyPath: night
       value: 
       objectReference: {fileID: 927011937}
+    - target: {fileID: 8941313146116825863, guid: 019b36d1369a57441954fe5aa22e9bbf, type: 3}
+      propertyPath: moveControler
+      value: 
+      objectReference: {fileID: 951271160}
+    - target: {fileID: 8941313146116825863, guid: 019b36d1369a57441954fe5aa22e9bbf, type: 3}
+      propertyPath: rotateControler
+      value: 
+      objectReference: {fileID: 1858385143}
     - target: {fileID: 8941313146116825863, guid: 019b36d1369a57441954fe5aa22e9bbf, type: 3}
       propertyPath: detectorCanvas.Array.data[0]
       value: 

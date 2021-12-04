@@ -9,12 +9,13 @@ public class Ghost : MonoBehaviour
 
     [SerializeField]
     Player player;
+    [SerializeField]
+    List<Canvas> attackCanvas = new List<Canvas>();
 
     [SerializeField]
     int border = 25;
 
     private Vector3 startPosition;
-    private List<Canvas> attackCanvas = new List<Canvas>();
 
     private float changeDirTime = 0;
     private Vector3 dir;
