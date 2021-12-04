@@ -5,7 +5,7 @@ using UnityEngine;
 public class Skeleton : MonoBehaviour
 {
     public Game game;
-    AudioSource boneSound;
+    private AudioSource boneSound;
 
     private void Start()
     {
