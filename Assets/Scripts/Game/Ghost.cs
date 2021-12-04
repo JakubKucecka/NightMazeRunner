@@ -4,36 +4,38 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
+    public float startSpeed = 4f;
+    public float speed;
+
     [SerializeField]
     Player player;
 
     [SerializeField]
-    private int border = 25;
-    public float startSpeed = 4f;
-    public float speed;
-    public Vector3 startPosition;
+    int border = 25;
 
-    float changeDirTime = 0;
-    Vector3 dir;
-    Quaternion rotate;
-    Quaternion startRotation;
-    Quaternion childStartRotation;
+    private Vector3 startPosition;
+    private List<Canvas> attackCanvas = new List<Canvas>();
 
-    Vector3 up = new Vector3(1, 0, 0);
-    Vector3 down = new Vector3(-1, 0, 0);
-    Vector3 right = new Vector3(0, 0, 1);
-    Vector3 left = new Vector3(0, 0, -1);
+    private float changeDirTime = 0;
+    private Vector3 dir;
+    private Quaternion rotate;
+    private Quaternion startRotation;
+    private Quaternion childStartRotation;
 
-    public List<Canvas> attackCanvas = new List<Canvas>();
-    float blinkTime;
-    float blinkTimeChange = 0.30f;
-    int blinkCounter;
-    bool attack;
+    private Vector3 up = new Vector3(1, 0, 0);
+    private Vector3 down = new Vector3(-1, 0, 0);
+    private Vector3 right = new Vector3(0, 0, 1);
+    private Vector3 left = new Vector3(0, 0, -1);
 
-    AudioSource breathingSound;
-    AudioSource attackSound;
-    AudioSource screamSound;
-    bool IsBreathing;
+    private float blinkTime;
+    private float blinkTimeChange = 0.30f;
+    private int blinkCounter;
+    private bool attack;
+
+    private AudioSource breathingSound;
+    private AudioSource attackSound;
+    private AudioSource screamSound;
+    private bool IsBreathing;
 
     public Vector3 bonePosition;
     public bool goForBone;
