@@ -38,22 +38,49 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetButton("MoveUp"))
         {
             buttonFunction.Walk();
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            if (!Input.GetButton("MoveDown") && !Input.GetButton("MoveRight") && !Input.GetButton("MoveLeft"))
+            {
+                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            } else
+            {
+                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime / 2);
+            }
         }
         if (Input.GetButton("MoveDown"))
         {
             buttonFunction.Walk();
-            transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+            if (!Input.GetButton("MoveUp") && !Input.GetButton("MoveRight") && !Input.GetButton("MoveLeft"))
+            {
+                transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector3.back * moveSpeed * Time.deltaTime / 2);
+            }
         }
         if (Input.GetButton("MoveRight"))
         {
             buttonFunction.Walk();
-            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+            if (!Input.GetButton("MoveUp") && !Input.GetButton("MoveDown") && !Input.GetButton("MoveLeft"))
+            {
+                transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector3.right * moveSpeed * Time.deltaTime / 2);
+            }
         }
         if (Input.GetButton("MoveLeft"))
         {
             buttonFunction.Walk();
-            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+            if (!Input.GetButton("MoveUp") && !Input.GetButton("MoveDown") && !Input.GetButton("MoveRight"))
+            {
+                transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector3.left * moveSpeed * Time.deltaTime / 2);
+            }
         }
 
         if (!Input.GetButton("MoveUp") && !Input.GetButton("MoveDown") && !Input.GetButton("MoveRight") && !Input.GetButton("MoveLeft"))

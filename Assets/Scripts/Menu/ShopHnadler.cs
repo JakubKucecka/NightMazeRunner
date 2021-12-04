@@ -35,6 +35,7 @@ public class ShopHnadler : MonoBehaviour
     public int batteryPrice = 20;
     public int glovesPrice = 500;
     public int detectorPrice = 500;
+    public int maxLives = 6;
 
     // Update is called once per frame
     void Update()
@@ -47,8 +48,8 @@ public class ShopHnadler : MonoBehaviour
         glovesText.text = glovesPrice + "";
         detectorText.text = detectorPrice + "";
 
-        livesButton.interactable = CheckCoins(livesPrice) && game.player.lives < 5;
-        livesButton.GetComponentInChildren<Text>().enabled = CheckCoins(livesPrice) && game.player.lives < 5;
+        livesButton.interactable = CheckCoins(livesPrice) && game.player.lives < maxLives;
+        livesButton.GetComponentInChildren<Text>().enabled = CheckCoins(livesPrice) && game.player.lives < maxLives;
         batteryButton.interactable = CheckCoins(batteryPrice) && game.player.energy < 100;
         batteryButton.GetComponentInChildren<Text>().enabled = CheckCoins(batteryPrice) && game.player.energy < 100;
         glovesButton.interactable = CheckCoins(glovesPrice);
@@ -59,7 +60,7 @@ public class ShopHnadler : MonoBehaviour
 
     public void buyLives()
     {
-        if (CheckCoins(livesPrice) && game.player.lives < 5)
+        if (CheckCoins(livesPrice) && game.player.lives < maxLives)
         {
             game.player.coins -= livesPrice / 10;
             game.player.AddLive();

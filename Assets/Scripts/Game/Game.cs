@@ -270,7 +270,7 @@ public class Game : MonoBehaviour
     {
         gameData = new JsonGameData();
         string json = JsonUtility.ToJson(gameData);
-        File.WriteAllText(dataPath, json);
+        Obfuscate(dataPath, json);
         LoadGameDataFromJSON();
     }
 
