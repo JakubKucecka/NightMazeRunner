@@ -8,24 +8,17 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     public bool showMenu;
+
     public int maxLevel;
-    public Canvas infoCanvas;
-
-    [SerializeField]
-    GameObject night;
-
-    [SerializeField]
-    GameObject itemSpavnerGO;
-
     public int level;
     public Dictionary<int, bool> unlockedLevels;
+    public List<GameObject> levels = new List<GameObject>();
+
+    public Dictionary<int, Dictionary<GameObject, List<Vector3>>> itemsByLevels = new Dictionary<int, Dictionary<GameObject, List<Vector3>>>();
+    public JsonGameData gameData;
 
     public Player player;
     public Ghost ghost;
-    ItemSpawner itemSpawner;
-    CameraHandler cameraHandler;
-
-    public Dictionary<int, Dictionary<GameObject, List<Vector3>>> itemsByLevels = new Dictionary<int, Dictionary<GameObject, List<Vector3>>>();
 
     // prefabs ganme items
     public GameObject batteryPrefab;
@@ -34,9 +27,16 @@ public class Game : MonoBehaviour
     public GameObject detectorPrefab;
     public GameObject mapPrefab;
 
-    string dataPath;
-    public JsonGameData gameData;
-    public List<GameObject> levels = new List<GameObject>();
+    [SerializeField]
+    Canvas infoCanvas;
+    [SerializeField]
+    GameObject night;
+    [SerializeField]
+    CameraHandler cameraHandler;
+    [SerializeField]
+    ItemSpawner itemSpawner;
+
+    private string dataPath;
 
     // Start is called before the first frame update
     void Start()
@@ -45,11 +45,6 @@ public class Game : MonoBehaviour
         dataPath = Application.persistentDataPath + "/game_data";
         gameData = new JsonGameData();
         loadLevelItems();
-
-        player = GetComponentInChildren<Player>();
-        ghost = GetComponentInChildren<Ghost>();
-        itemSpawner = itemSpavnerGO.GetComponentInChildren<ItemSpawner>();
-        cameraHandler = GetComponentInChildren<CameraHandler>();
     }
 
     // Update is called once per frame

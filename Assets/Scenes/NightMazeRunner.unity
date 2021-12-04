@@ -6790,6 +6790,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8205009717678485962, guid: ba93260fe4d482744859fd8aed677f5a, type: 3}
   m_PrefabInstance: {fileID: 4711199148586298224}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &909828793 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3536051246221763136, guid: ba93260fe4d482744859fd8aed677f5a, type: 3}
+  m_PrefabInstance: {fileID: 4711199148586298224}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909828789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e83fcdcad2592d4ab10c608db6696a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &918126603
 GameObject:
   m_ObjectHideFlags: 0
@@ -9580,7 +9591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b1dace51be97a4bb6ad3d48263ab00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameGO: {fileID: 1410477187}
+  game: {fileID: 1410477190}
 --- !u!65 &1182405818
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11241,17 +11252,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showMenu: 0
   maxLevel: 3
-  infoCanvas: {fileID: 527287262}
-  night: {fileID: 927011937}
-  itemSpavnerGO: {fileID: 833257357}
   level: 1
-  player: {fileID: 0}
-  ghost: {fileID: 0}
-  batteryPrefab: {fileID: 1596115391991084105, guid: 7ecf2c0214f025e4dac86ef57292ff9e, type: 3}
-  coinPrefab: {fileID: 5704787442791747038, guid: 7cb807ae69b3c1147b7f6d84d6952569, type: 3}
-  nightVissionPrefab: {fileID: 8558061957555346022, guid: 2c08bfafbcf0d54498eb0afdd70e7b08, type: 3}
-  detectorPrefab: {fileID: 1312456693962197548, guid: a2519ff50bbf0c94e9198595db117ac3, type: 3}
-  mapPrefab: {fileID: 2218154943572924624, guid: c42ffcea6984481408d7d7d7574d2dbd, type: 3}
+  levels:
+  - {fileID: 942055094}
+  - {fileID: 2070866355}
+  - {fileID: 1598828004}
+  - {fileID: 2667234692688792227}
+  - {fileID: 2667234693582353806}
   gameData:
     energy: 100
     lives: 3
@@ -11262,12 +11269,17 @@ MonoBehaviour:
     detector: 0
     detectorLevel: 1
     unlockLevels: 01000000
-  levels:
-  - {fileID: 942055094}
-  - {fileID: 2070866355}
-  - {fileID: 1598828004}
-  - {fileID: 2667234692688792227}
-  - {fileID: 2667234693582353806}
+  player: {fileID: 951271158}
+  ghost: {fileID: 909828793}
+  batteryPrefab: {fileID: 1596115391991084105, guid: 7ecf2c0214f025e4dac86ef57292ff9e, type: 3}
+  coinPrefab: {fileID: 5704787442791747038, guid: 7cb807ae69b3c1147b7f6d84d6952569, type: 3}
+  nightVissionPrefab: {fileID: 8558061957555346022, guid: 2c08bfafbcf0d54498eb0afdd70e7b08, type: 3}
+  detectorPrefab: {fileID: 1312456693962197548, guid: a2519ff50bbf0c94e9198595db117ac3, type: 3}
+  mapPrefab: {fileID: 2218154943572924624, guid: c42ffcea6984481408d7d7d7574d2dbd, type: 3}
+  infoCanvas: {fileID: 527287262}
+  night: {fileID: 927011937}
+  cameraHandler: {fileID: 1410477189}
+  itemSpawner: {fileID: 833257359}
 --- !u!1 &1419074834
 GameObject:
   m_ObjectHideFlags: 0
