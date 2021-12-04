@@ -80,9 +80,6 @@ public class CameraHandler : MonoBehaviour
 
             moveControler.firstPerson = false;
             rotateControler.firstPerson = false;
-
-            rotateControler.transform.Rotate(0, -90, 0);
-            moveControler.transform.rotation = moveControler.startRotation;
         }
         else
         {
@@ -92,11 +89,6 @@ public class CameraHandler : MonoBehaviour
 
             moveControler.firstPerson = true;
             rotateControler.firstPerson = true;
-
-            rotateControler.transform.Rotate(0, 90, 0);
-            var newRoattaion = rotateControler.transform.rotation;
-            rotateControler.transform.rotation = moveControler.startRotation;
-            moveControler.transform.rotation = newRoattaion;
         }
     }
 

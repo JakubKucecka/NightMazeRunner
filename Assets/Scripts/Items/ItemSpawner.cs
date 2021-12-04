@@ -36,6 +36,7 @@ public class ItemSpawner : MonoBehaviour
                 if (newItem.GetComponent<MiniMap>() != null) newItem.GetComponent<MiniMap>().player = player;
                 newItem.transform.position = i;
                 newItem.GetComponent<Item>().pickUp = pickUpSound;
+                newItem.GetComponent<Item>().player = player.GetComponent<Player>();
             }
         }
     }

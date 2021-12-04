@@ -41,39 +41,39 @@ public class MenuGameSwitcher : MonoBehaviour
         }
         else if (!menuCamera.enabled)
         {
-            if (!soundIsPlay)
-            {
-                soundIsPlay = true;
-                backgroundSound.Play();
-            }
             menuCamera.enabled = true;
             if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
             if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
             menu.ShowHome();
         }
 
+        if (game.showMenu && !soundIsPlay)
+        {
+            soundIsPlay = true;
+            backgroundSound.Play();
+        }
+
         if (game.player.gameover)
         {
             game.player.gameover = false;
             game.player.gameIsStarted = false;
-            game.showMenu = true;
-            menu.ShowCanvas(menu.gameoverCanvas);
-            menuCamera.enabled = true;
             if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
             if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
             game.ResetGameData();
-            Invoke("CallShowHome", 5);
+            game.showMenu = true;
+            menu.ShowCanvas(menu.gameoverCanvas);
+            menuCamera.enabled = true;
         }
 
         if (game.player.finish)
         {
             game.player.finish = false;
             game.player.gameIsStarted = false;
+            if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
+            if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
             game.showMenu = true;
             menu.ShowCanvas(menu.congratsCanvas);
             menuCamera.enabled = true;
-            if (bodyCamera != null && bodyCamera.enabled) bodyCamera.enabled = false;
-            if (mainCamera != null && mainCamera.enabled) mainCamera.enabled = false;
         }
     }
 

@@ -20,7 +20,7 @@ public class Game : MonoBehaviour
     public Dictionary<int, bool> unlockedLevels;
 
     public Player player;
-    Ghost ghost;
+    public Ghost ghost;
     ItemSpawner itemSpawner;
     CameraHandler cameraHandler;
 
@@ -42,7 +42,6 @@ public class Game : MonoBehaviour
     {
         maxLevel = levels.Count;
         dataPath = Application.persistentDataPath + "/game_data.json";
-        Debug.Log(dataPath);
         gameData = new JsonGameData();
         loadLevelItems();
 

@@ -42,10 +42,10 @@ public class ShopHnadler : MonoBehaviour
         gloves.SetActive(!game.gameData.gloves);
         detector.SetActive(!game.gameData.detector);
 
-        livesText.text = livesPrice + " coins";
-        batteryText.text = batteryPrice + " coins";
-        glovesText.text = glovesPrice + " coins";
-        detectorText.text = detectorPrice + " coins";
+        livesText.text = livesPrice + "";
+        batteryText.text = batteryPrice + "";
+        glovesText.text = glovesPrice + "";
+        detectorText.text = detectorPrice + "";
 
         livesButton.interactable = CheckCoins(livesPrice) && game.player.lives < 5;
         livesButton.GetComponentInChildren<Text>().enabled = CheckCoins(livesPrice) && game.player.lives < 5;

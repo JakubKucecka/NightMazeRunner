@@ -85,6 +85,7 @@ public class PlayerMove : MonoBehaviour
             var yQuat = Quaternion.AngleAxis(rotation.y, Vector3.right * Time.deltaTime);
 
             transform.localRotation = xQuat;
+            transform.transform.Rotate(0, -90, 0);
             bodyCamera.transform.localRotation = yQuat;
             bodyCamera.transform.Rotate(0, 180, 0);
         }

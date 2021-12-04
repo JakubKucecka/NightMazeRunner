@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     float rotationSpeed = 50;
+    public Player player;
     public AudioSource pickUp;
 
     // Update is called once per frame
@@ -22,8 +23,9 @@ public class Item : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (player.gameIsStarted && other.name == "Player")
         {
+            Debug.Log("play");
             pickUp.Play();
             Destroy(gameObject);
         }

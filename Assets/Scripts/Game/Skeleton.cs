@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skeleton : MonoBehaviour
 {
-    public Ghost ghost;
+    public Game game;
     AudioSource boneSound;
 
     private void Start()
@@ -14,11 +14,11 @@ public class Skeleton : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (!game.showMenu && other.name == "Player")
         {
             boneSound.Play();
-            ghost.bonePosition = transform.position;
-            ghost.goForBone = true;
+            game.ghost.bonePosition = transform.position;
+            game.ghost.goForBone = true;
         }
     }
 }

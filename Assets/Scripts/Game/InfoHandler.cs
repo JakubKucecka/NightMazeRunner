@@ -45,7 +45,7 @@ public class InfoHandler : MonoBehaviour
         for (var i = 0; i < player.lives; i++)
         {
             var newLive = Instantiate(livePrefab, liveSpavner.transform);
-            newLive.transform.position += new Vector3(0, 0, lives.Count * 50 * gameObject.transform.localScale.z);
+            newLive.transform.localPosition += getLiveMoves(i);
             lives.Add(newLive);
         }
     }
@@ -56,7 +56,7 @@ public class InfoHandler : MonoBehaviour
         if (player.lives > lives.Count)
         {
             var newLive = Instantiate(livePrefab, liveSpavner.transform);
-            newLive.transform.position = new Vector3(0, 0, lives.Count * 100 * gameObject.transform.localScale.z);
+            newLive.transform.localPosition += getLiveMoves(lives.Count);
             lives.Add(newLive);
         }
         else if (player.lives < lives.Count && player.lives > 0)
@@ -101,5 +101,10 @@ public class InfoHandler : MonoBehaviour
             energyWidth = 100;
         }
         energy.rectTransform.sizeDelta = new Vector2(energyWidth, energy.rectTransform.sizeDelta.y);
+    }
+
+    Vector3 getLiveMoves(int count)
+    {
+        return Vector3.right * 80 * count;
     }
 }

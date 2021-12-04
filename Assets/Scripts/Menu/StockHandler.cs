@@ -51,9 +51,9 @@ public class StockHandler : MonoBehaviour
         glovesPrice = price * (game.gameData.glovesLevel + 1);
         detectorPrice = price * (game.gameData.detectorLevel + 1);
 
-        lightText.text = lightPrice + " coins";
-        glovesText.text = glovesPrice + " coins";
-        detectorText.text = detectorPrice + " coins";
+        lightText.text = lightPrice + "";
+        glovesText.text = glovesPrice + "";
+        detectorText.text = detectorPrice + "";
 
         lightLevelText.text = "LEVEL: " + game.gameData.lightLevel;
         glovesLevelText.text = "LEVEL: " + game.gameData.glovesLevel;
