@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 8;
     public bool firstPerson;
 
-    public float sensitivity = 0.5f;
-    Vector2 rotation = Vector2.zero;
+    [SerializeField]
+    float moveSpeed = 8;
+    [SerializeField]
+    float sensitivity = 0.5f;
+    [SerializeField]
+    float yRotationLimit = 88f;
+
+    [SerializeField]
+    ButtonFunction buttonFunction;
+    [SerializeField]
+    Camera bodyCamera;
+
     const string xAxis = "Mouse X";
     const string yAxis = "Mouse Y";
-    public float yRotationLimit = 88f;
+    private Vector2 rotation = Vector2.zero;
 
     public Vector3 startPositon;
     public Quaternion startRotation;
-    public ButtonFunction buttonFunction;
 
-    public Camera bodyCamera;
-
-    AudioSource stepSound;
-    bool isWalking;
+    private AudioSource stepSound;
+    private bool isWalking;
 
     // Start is called before the first frame update
     void Start()
