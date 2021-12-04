@@ -47,7 +47,8 @@ public class PlayerMove : MonoBehaviour
             if (!Input.GetButton("MoveDown") && !Input.GetButton("MoveRight") && !Input.GetButton("MoveLeft"))
             {
                 transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-            } else
+            }
+            else
             {
                 transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime / 2);
             }
@@ -97,7 +98,8 @@ public class PlayerMove : MonoBehaviour
                 isWalking = false;
                 stepSound.Stop();
             }
-        } else
+        }
+        else
         {
             if (!isWalking)
             {
@@ -113,7 +115,7 @@ public class PlayerMove : MonoBehaviour
         {
             rotation.x += Input.GetAxis(xAxis) * sensitivity;
             rotation.y += Input.GetAxis(yAxis) * sensitivity;
-            rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit*2);
+            rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit * 2);
             var xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up * Time.deltaTime);
             var yQuat = Quaternion.AngleAxis(rotation.y, Vector3.right * Time.deltaTime);
 
