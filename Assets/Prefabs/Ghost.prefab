@@ -62,14 +62,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e83fcdcad2592d4ab10c608db6696a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  border: 25
   startSpeed: 4
   speed: 4
-  startPosition: {x: 0, y: 0, z: 0}
+  player: {fileID: 0}
   attackCanvas:
   - {fileID: 0}
   - {fileID: 0}
+  border: 25
   bonePosition: {x: 0, y: 0, z: 0}
   goForBone: 0
 --- !u!82 &909828792

@@ -279,7 +279,7 @@ MonoBehaviour:
   energy: {fileID: 1719053791}
   energyText: {fileID: 1044620760}
   coins: {fileID: 1211288242}
-  gloves: {fileID: 2066153127}
+  nightVission: {fileID: 2066153127}
   detector: {fileID: 2006590824}
   miniMap: {fileID: 1358488500}
   level3: {fileID: 21300000, guid: 8cb67c531b7746e47ade8d3686dd1198, type: 3}
@@ -1614,7 +1614,7 @@ GameObject:
   - component: {fileID: 2066153130}
   - component: {fileID: 2066153129}
   m_Layer: 5
-  m_Name: Gloves
+  m_Name: NightVission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2369,14 +2369,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c407b1828302894c81b7a76fca6fc29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
   firstPerson: 0
+  moveSpeed: 8
   sensitivity: 2
   yRotationLimit: 88
-  startPositon: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
   buttonFunction: {fileID: 4247918928951298398}
   bodyCamera: {fileID: 8321825776276339035}
+  startPositon: {x: 0, y: 0, z: 0}
+  startRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &8941313146116825863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2408,14 +2408,14 @@ MonoBehaviour:
   finish: 0
   started: 0
   useMiniMap: 0
-  moveControler: {fileID: 0}
-  rotateControler: {fileID: 0}
-  night: {fileID: 0}
+  moveControler: {fileID: 8321825776209322740}
+  rotateControler: {fileID: 6582862330282054070}
   detector: {fileID: 6582862328749809385}
+  nightVisionGloves: {fileID: 1149983572118257775}
   detectorCanvas:
   - {fileID: 0}
   - {fileID: 1990476226}
-  nightVisionGloves: {fileID: 1149983572118257775}
+  night: {fileID: 0}
   ghost: {fileID: 0}
   redMat: {fileID: 2100000, guid: f5257a8261a988c40affe9470fd30ea3, type: 2}
   greenMat: {fileID: 2100000, guid: c61090dcc7df0e943a302aedef777e48, type: 2}
@@ -3008,7 +3008,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8558061957555346022, guid: 2c08bfafbcf0d54498eb0afdd70e7b08, type: 3}
       propertyPath: m_Name
-      value: Night Vision Goggles
+      value: NightVissionGloves
       objectReference: {fileID: 0}
     - target: {fileID: 8558061957555346022, guid: 2c08bfafbcf0d54498eb0afdd70e7b08, type: 3}
       propertyPath: m_IsActive
