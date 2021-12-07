@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// zastresuje spravu obchodu
+/// </summary>
 public class ShopHnadler : MonoBehaviour
 {
 
@@ -38,7 +39,9 @@ public class ShopHnadler : MonoBehaviour
     [SerializeField]
     Button detectorButton;
 
-    // Update is called once per frame
+    /// <summary>
+    /// v update funkcii sa skyvaju a zobrazuju bloky ktore si pouzivatel moze zakupit 
+    /// </summary>
     void Update()
     {
         nightVission.SetActive(!game.gameData.nightVission);
@@ -99,6 +102,11 @@ public class ShopHnadler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// stale kontrolujeme ci mame dostatok penazy na zakupenie
+    /// </summary>
+    /// <param name="price"></param>
+    /// <returns></returns>
     private bool CheckCoins(int price)
     {
         return price <= game.player.coins * 10 ? true : false;

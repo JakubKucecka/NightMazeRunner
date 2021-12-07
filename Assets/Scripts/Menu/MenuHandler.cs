@@ -1,8 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// script prepina jednotlive canvasy menu
+/// </summary>
 public class MenuHandler : MonoBehaviour
 {
     public Canvas gameoverCanvas;
@@ -15,7 +17,9 @@ public class MenuHandler : MonoBehaviour
 
     private AudioSource buttonHover;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// pri starte sa nastavi hover sound pre kazde tlacidlo a zobrazy sa domov
+    /// </summary>
     void Start()
     {
         ShowAll();
@@ -29,18 +33,28 @@ public class MenuHandler : MonoBehaviour
         ShowHome();
     }
 
+    /// <summary>
+    /// zobrazy home canvas
+    /// </summary>
     public void ShowHome()
     {
         HideAll();
         menuCanvases[0].gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// zobrazi konkretny canvas
+    /// </summary>
+    /// <param name="canvas"></param>
     public void ShowCanvas(Canvas canvas)
     {
         HideAll();
         canvas.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// skyje vsetky canvasy
+    /// </summary>
     public void HideAll()
     {
         foreach (Canvas c in menuCanvases)
@@ -51,6 +65,9 @@ public class MenuHandler : MonoBehaviour
         congratsCanvas.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// pre nastavenie hover efektu potrebujeme zobrazit vsetky canvasy
+    /// </summary>
     public void ShowAll()
     {
         foreach (Canvas c in menuCanvases)

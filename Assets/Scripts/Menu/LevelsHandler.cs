@@ -1,13 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// script kontroluje intrakciu tlacidiel levelov
+/// </summary>
 public class LevelsHandler : MonoBehaviour
 {
     [SerializeField]
     Game game;
 
+    /// <summary>
+    /// ak je level odomknuty, vieme na dane tlacidlo kliknut
+    /// </summary>
     public void showLevels()
     {
         var levelsButtons = GetComponentsInChildren<Button>();

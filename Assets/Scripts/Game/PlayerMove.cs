@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// script ovlada pohyb hraca
+/// </summary>
 public class PlayerMove : MonoBehaviour
 {
     public bool firstPerson;
@@ -28,7 +29,9 @@ public class PlayerMove : MonoBehaviour
     private AudioSource stepSound;
     private bool isWalking;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// pri starte sa ulozia startovacie informacie a nacita zvukovy zdroj
+    /// </summary>
     void Start()
     {
         stepSound = GetComponent<AudioSource>();
@@ -38,7 +41,13 @@ public class PlayerMove : MonoBehaviour
         startPositon = transform.position;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// v update sa kontroluje pohyb pomocou stlacenia kalves v InputManagery
+    /// pri stlaceni dvoch klaves sa znasovila rychlost a nastal problem s ratanim fyziky
+    /// preto pri stlaceni klaves je hrac spomaleny na polovicu
+    /// 
+    /// trieda buttonFunction, ktora zabezpecuje animacie je prebrata z assetu _GhoulZombie
+    /// </summary>
     void Update()
     {
         if (Input.GetButton("MoveUp"))
@@ -90,6 +99,8 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
+        // ak nie je stlaceny ziaden klaves hrac je animovany ako by stal ale hybe hlavou
+        // v opacnom pripade je pusteny zvuk chodze
         if (!Input.GetButton("MoveUp") && !Input.GetButton("MoveDown") && !Input.GetButton("MoveRight") && !Input.GetButton("MoveLeft"))
         {
             buttonFunction.Idle();
@@ -109,6 +120,9 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// tu sa vykonava natocenie hraca pomocou mysi ak pouzivame first person kameru
+    /// </summary>
     void OnGUI()
     {
         if (firstPerson)

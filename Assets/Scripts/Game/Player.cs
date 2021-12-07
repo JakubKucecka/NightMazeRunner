@@ -1,8 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// script zastresuje kontrolu a zakladne atributy bezca
+/// </summary>
 public class Player : MonoBehaviour
 {
     public bool gameIsStarted;
@@ -53,7 +55,9 @@ public class Player : MonoBehaviour
     private bool alarmPlay;
     private AudioSource alarmSound;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// pri starte sa nastavia potrebne atributy
+    /// </summary>
     void Start()
     {
         alarmPlay = false;
@@ -75,13 +79,16 @@ public class Player : MonoBehaviour
         lights = GetComponentsInChildren<Light>();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// v update funkcii kontrolujeme zapinanei a vypinanie detektora a svetla
+    /// </summary>
     void Update()
     {
         if (gameIsStarted)
         {
             if (energy > 0)
             {
+                // prepocet energie
                 if (useItems)
                 {
                     energy -= energyDecrease * Time.deltaTime;
@@ -89,10 +96,12 @@ public class Player : MonoBehaviour
             }
             else
             {
+                // vypnutie vsetkych objektov a reset energie
                 turnOffAllItemsWithout(0);
                 energy = 0;
             }
 
+            // zapinaie a vypinanie svetiel
             if (useLight)
             {
                 turnOnLight();
@@ -102,6 +111,7 @@ public class Player : MonoBehaviour
                 turnOffLight();
             }
 
+            // zapinaie a vypinanie detektora
             if (useDetector && getDistanceOfGhosh() < saveDistance && blinkTime < Time.time)
             {
                 changeDetectorColor();
@@ -126,6 +136,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// pri restarte hraca sa vypnu svetla a restartne sa pozicia a otocenie
+    /// </summary>
     public void RestartPlayer()
     {
         turnOffAllItemsWithout(0);
@@ -140,6 +153,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// opat zapnutie alebo vypnutie svetla
+    /// </summary>
     public void changeUseLight()
     {
         if (useLight)
@@ -149,14 +165,17 @@ public class Player : MonoBehaviour
         }
         else
         {
-            // TODO: set player.energyDecrease from JSON
             turnOffAllItemsWithout(1);
             turnOnLight();
         }
     }
 
+    /// <summary>
+    /// prepocet ubytku energie pri zapnuti svetla a aj samotne zapnutie
+    /// </summary>
     public void turnOnLight()
     {
+        // ratanie ubytku energie funguje na odratany mocniny 0.4 podla levelu od maximalneho ubytku pre dany objekt
         energyDecrease = (float)(energyMaxDecreaseLight * Math.Pow(0.4, lightLevel - 1));
         if (energy > 0)
         {
@@ -168,6 +187,10 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// vypnutie svetla
+    /// </summary>
     public void turnOffLight()
     {
         foreach (var l in lights)
@@ -218,6 +241,9 @@ public class Player : MonoBehaviour
         return dist;
     }
 
+    /// <summary>
+    /// zapnutie alebo vypnutie detektora
+    /// </summary>
     public void changeUseDetector()
     {
         if (useDetector)
@@ -229,6 +255,7 @@ public class Player : MonoBehaviour
         {
             if (gameItems["detector"])
             {
+                // ratanie ubytku energie funguje na odratany mocniny 0.4 podla levelu od maximalneho ubytku pre dany objekt
                 energyDecrease = (float)(energyMaxDecreaseDetector * Math.Pow(0.4, detectorLevel - 1));
                 detector.SetActive(true);
                 turnOffAllItemsWithout(3);

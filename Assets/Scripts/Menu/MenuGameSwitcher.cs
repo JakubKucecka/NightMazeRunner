@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
+/// <summary>
+/// script prepina medzi hrou a menu
+/// </summary>
 public class MenuGameSwitcher : MonoBehaviour
 {
     [SerializeField]
@@ -22,14 +22,18 @@ public class MenuGameSwitcher : MonoBehaviour
 
     private bool newGameCounter = false;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// pri starte sa nacita zdroj audia
+    /// </summary>
     void Start()
     {
         backgroundSound = GetComponent<AudioSource>();
         soundIsPlay = false;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// v update fukcii kontrolujeme zobrazenie menu alebo hry
+    /// </summary>
     void Update()
     {
         if (!game.showMenu)
@@ -56,6 +60,7 @@ public class MenuGameSwitcher : MonoBehaviour
             backgroundSound.Play();
         }
 
+        // ak nastane game over zobrazime potrebnu obrazovku
         if (game.player.gameover)
         {
             game.player.gameover = false;
@@ -68,6 +73,7 @@ public class MenuGameSwitcher : MonoBehaviour
             menuCamera.enabled = true;
         }
 
+        // ak nastane prejdenie posledneho levelu zobrazime potrebnu obrazovku
         if (game.player.finish)
         {
             game.player.finish = false;
@@ -80,11 +86,11 @@ public class MenuGameSwitcher : MonoBehaviour
         }
     }
 
-    void CallShowHome()
-    {
-        menu.ShowHome();
-    }
-
+    /// <summary>
+    /// pri starte levelu nacitame objkety a prepneme obrazovku
+    /// funkcia reaguje na start konkretneho levelu alebo posledneho mozneho
+    /// </summary>
+    /// <param name="level"></param>
     public void startLevel(int level)
     {
         if (level == 0)
@@ -110,6 +116,9 @@ public class MenuGameSwitcher : MonoBehaviour
         newGameCounter = false;
     }
 
+    /// <summary>
+    /// ak sa pouzivatel rozhodne zacat od zaciatku obnovia sa vsetky data
+    /// </summary>
     public void StartNewGame()
     {
         if (newGameCounter)
@@ -121,6 +130,9 @@ public class MenuGameSwitcher : MonoBehaviour
         newGameCounter = true;
     }
 
+    /// <summary>
+    /// ukoncenie aplikacie
+    /// </summary>
     public void ExitApplication()
     {
         Application.Quit();

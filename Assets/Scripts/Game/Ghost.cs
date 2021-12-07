@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,7 +39,10 @@ public class Ghost : MonoBehaviour
 
     public Vector3 bonePosition;
     public bool goForBone;
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// pri starte inicializujeme zvuky, ktore dany objekt obsahuje a ulozime si startovaciu poziciu a otocenie
+    /// </summary>
     void Start()
     {
         goForBone = false;
@@ -56,27 +58,34 @@ public class Ghost : MonoBehaviour
         speed = startSpeed;
         startPosition = transform.position;
         startRotation = transform.rotation;
-        childStartRotation = transform.GetChild(0).transform.rotation;
+        childStartRotation = transform.GetChild(0).transform.localRotation;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// update zabezpecuje pohyb a spustanie zvukov
+    /// </summary>
     void Update()
     {
+        // ak je aktivovany pohyb ku kostre tak kontrolujeme ako je duch daleko
+        // ak je blizko ukoncime pohyb ku kostre
         if (bonePosition != null && Vector3.Distance(transform.position, bonePosition) < 5)
         {
             goForBone = false;
             transform.rotation = startRotation;
-            transform.GetChild(0).transform.rotation = childStartRotation;
+            transform.GetChild(0).transform.localRotation = childStartRotation;
         }
 
+        // ak je hra spustena, teda nie je zobrazenen menu zacne pohyb ducha
         if (player.gameIsStarted)
         {
+            // zapneme zvuk dychu ducha
             if (!IsBreathing)
             {
                 IsBreathing = true;
                 breathingSound.Play();
             }
 
+            // ak je cas na zmenu pohybu tak vyratame novy cas zmeny a tiez smer pohybu
             if (changeDirTime <= Time.time)
             {
                 float nextTime = Random.Range(0.5f, 2f);
@@ -84,15 +93,26 @@ public class Ghost : MonoBehaviour
                 GetDir();
             }
 
+            // zmenu smeru pohybu ratame aj v tom pripade, ze duch je pri okrajy areny
             if (transform.position.x >= border || transform.position.x <= -1 * border
                 || transform.position.z >= border || transform.position.z <= -1 * border)
             {
                 GetDir();
             }
 
-            transform.Translate(dir * speed * Time.deltaTime);
-            transform.GetChild(0).rotation = rotate;
+            // po vyratany smeru pohybu zacneme duchom hybat v danom smere
+            if (goForBone)
+            {
+                transform.Translate(dir * 7 * speed * Time.deltaTime);
+                transform.GetChild(0).localRotation = childStartRotation;
+            }
+            else
+            {
+                transform.Translate(dir * speed * Time.deltaTime);
+                transform.GetChild(0).rotation = rotate;
+            }
 
+            // ak nastane kolizia s hracom pustime zvuk utoku a zabezpecime blikanie aby sme hracovy ak vizualne naznacili utok
             if (attack && blinkTime < Time.time && blinkCounter < 10)
             {
                 blinkTime = Time.time + blinkTimeChange;
@@ -112,6 +132,7 @@ public class Ghost : MonoBehaviour
         }
         else
         {
+            // ak je zobrazene menu tak vypiname zvuky a pohyb ku kostre
             if (IsBreathing)
             {
                 IsBreathing = false;
@@ -119,10 +140,17 @@ public class Ghost : MonoBehaviour
             }
             goForBone = false;
             transform.rotation = startRotation;
-            transform.GetChild(0).transform.rotation = childStartRotation;
+            transform.GetChild(0).transform.localRotation = childStartRotation;
         }
     }
 
+    /// <summary>
+    /// tiez kontrolujeme okraje
+    /// ak ale nie sme pri okraji pridame do listu styri smery, hore, dole, doprava a dolava
+    /// tiez vyratame dva smery, ktore smeruju ku hracovy
+    /// nahodnym vyberom vyberieme jedel smer z listu
+    /// k danemu smeru doratame otocenie prveho dietate objektu ducha
+    /// </summary>
     public void GetDir()
     {
         if (!goForBone)
@@ -142,12 +170,19 @@ public class Ghost : MonoBehaviour
         }
         else
         {
+            // ak hrac stupil na kostru, duch sa pohybuje priamo ku kostre
+            // v danom pripade sa natoci cely objekt ku kostre a hybe sa priamo dopredu
             transform.LookAt(new Vector3(bonePosition.x, transform.position.y, bonePosition.z));
-            rotate = Quaternion.Inverse(Quaternion.identity);
-            dir = Vector3.forward * speed;
+            dir = Vector3.forward;
         }
     }
 
+    /// <summary>
+    /// funkcia rata smery ducha k hracovy
+    /// jedna sa iba o jednoduche porovnanie x a y suradnic
+    /// </summary>
+    /// <param name="dirs"></param>
+    /// <returns></returns>
     private List<Vector3> getPlayerPosition(List<Vector3> dirs)
     {
         if (player.transform.position.x < transform.position.x)
@@ -171,21 +206,28 @@ public class Ghost : MonoBehaviour
         return dirs;
     }
 
+    /// <summary>
+    /// pri kolizii ducha s hracom aktivujeme atak a hracovy odoberieme zivot
+    /// ak by bol zivot posledny zobrazime screen GameOver
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
         {
+            attack = true;
             attackSound.Play();
             screamSound.Play();
             player.GetLive();
             if (player.lives <= 0) player.gameover = true;
-
-            attack = true;
             blinkCounter = 0;
             blinkTime = 0;
         }
     }
 
+    /// <summary>
+    /// pri restarte hraca prenastavime startovaciu poziciu a vypneme vsetko potrebne
+    /// </summary>
     public void ReloadGhost()
     {
         transform.position = startPosition;
@@ -194,6 +236,10 @@ public class Ghost : MonoBehaviour
         blinkTime = 0;
     }
 
+    /// <summary>
+    /// fukcia vrati quaterion z eulerovho uhola pre dany smer
+    /// </summary>
+    /// <returns></returns>
     Quaternion GetRotate()
     {
         if (dir == up)

@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// zastresuje spravu vylepseni
+/// </summary>
 public class StockHandler : MonoBehaviour
 {
-
     public int price = 100;
     public int lightPrice;
     public int nightVissionPrice;
@@ -42,7 +42,9 @@ public class StockHandler : MonoBehaviour
 
     private int maxLevel = 5;
 
-    // Update is called once per frame
+    /// <summary>
+    /// rovnako ako v obchode aj tu kontrolujeme, ktory blok mozeme zobrazit
+    /// </summary>
     void Update()
     {
         nightVission.SetActive(game.gameData.nightVission);
@@ -98,6 +100,11 @@ public class StockHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// tiez stale kontrolujeme ci mame dostatok penazi na vylepsenie objektu 
+    /// </summary>
+    /// <param name="price"></param>
+    /// <returns></returns>
     private bool CheckCoins(int price)
     {
         return price <= game.player.coins * 10 ? true : false;

@@ -1,8 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// script pre kontrolu zmeny kamier
+/// </summary>
 public class CameraHandler : MonoBehaviour
 {
     [SerializeField]
@@ -31,6 +32,9 @@ public class CameraHandler : MonoBehaviour
         Invoke("reloadCameras", 2.0f);
     }
 
+    /// <summary>
+    /// v update sa iba kontroluje ci je zapnute nocne videnie alebo nie a podla toho zobrazuje potrebne canvas objekty
+    /// </summary>
     private void FixedUpdate()
     {
         if (player.useNightVission && player.energy > 0)
@@ -53,6 +57,10 @@ public class CameraHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// pri prepinani na nocne videnie sa kontroluje ci hrac vlastni dany objekt
+    /// nastavi ubytok energie a vypne ostatne objekty ako baterku a detektor
+    /// </summary>
     public void changeUseNightVission()
     {
         if (player.useNightVission)
@@ -61,9 +69,9 @@ public class CameraHandler : MonoBehaviour
         }
         else
         {
-            // TODO: set player.energyDecrease from JSON
             if (player.gameItems["nightVission"])
             {
+                // ratanie ubytku energie funguje na odratany mocniny 0.4 podla levelu od maximalneho ubytku pre dany objekt
                 player.energyDecrease = (float)(player.energyMaxDecreaseGloves * Math.Pow(0.4, nightVissionLevel - 1));
                 nightVisionGloves.SetActive(true);
                 if (player.energy > 0) night.SetActive(false);
@@ -74,6 +82,10 @@ public class CameraHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// pri zmene kamery sa nastavia premenne firstPerson v controlleroch na otacanie a pohyb Player-a
+    /// Tiez sa nastavia rotacie jednotlivych objektov
+    /// </summary>
     public void changeCamera()
     {
         if (firstPersonCamera.enabled)
@@ -100,6 +112,9 @@ public class CameraHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// pri restarte camier sa opat nastavy tma a obnovia sa controllery na otacanie a pohyb
+    /// </summary>
     public void reloadCameras()
     {
         player.useNightVission = false;

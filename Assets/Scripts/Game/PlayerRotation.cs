@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// script zabezpecuje rotaciu brzca
+/// </summary>
 public class PlayerRotation : MonoBehaviour
 {
     public bool firstPerson;
@@ -9,6 +10,9 @@ public class PlayerRotation : MonoBehaviour
 
     private Camera cam;
 
+    /// <summary>
+    /// pri starte sa ulozia startovacie informacie
+    /// </summary>
     void Start()
     {
         cam = Camera.main;
@@ -16,6 +20,9 @@ public class PlayerRotation : MonoBehaviour
         firstPerson = false;
     }
 
+    /// <summary>
+    /// rotacia je nastavena pomocou ratanaia natozenia hraca ku kurzoru mysi
+    /// </summary>
     void OnGUI()
     {
         if (cam != null && cam.enabled && !firstPerson)

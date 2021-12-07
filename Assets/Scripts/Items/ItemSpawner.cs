@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,16 +13,21 @@ public class ItemSpawner : MonoBehaviour
         pickUpSound = GetComponent<AudioSource>();
     }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// pri starte levelu pripravy potrebne objekty  
+    /// </summary>
+    /// <param name="itemsPositions"></param>
     public void ReloadItems(Dictionary<GameObject, List<Vector3>> itemsPositions)
     {
         var items = GameObject.FindGameObjectsWithTag("Item");
 
+        // vymaze vsetky ktore ostali z predchadzajuceho levelu
         foreach (var i in items)
         {
             Destroy(i);
         }
 
+        // vygeneruje tie, ktore ma obsahovat dany level
         foreach (var item in itemsPositions)
         {
             foreach (var i in item.Value)

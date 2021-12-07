@@ -1,8 +1,10 @@
 using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;// Required when using Event data.
+using UnityEngine.EventSystems;
 
+/// <summary>
+/// pridavame zvuk na prechod kurzorom ponad tlacidlo
+/// Required when using Event data.
+/// </summary>
 public class OnPointerEnterButton : MonoBehaviour, IPointerEnterHandler// required interface when using the OnPointerEnter method.
 {
     public AudioSource hover;

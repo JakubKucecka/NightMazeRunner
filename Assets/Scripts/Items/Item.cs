@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// script zastresuje kotrolu nad objektom itemu
+/// </summary>
 public class Item : MonoBehaviour
 {
     public Player player;
@@ -9,7 +10,9 @@ public class Item : MonoBehaviour
 
     private float rotationSpeed = 50;
 
-    // Update is called once per frame
+    /// <summary>
+    /// nastavujeme jeho rotaciu v arene
+    /// </summary>
     void Update()
     {
         if (GetComponent<NightVision>() != null || GetComponent<MiniMap>() != null)
@@ -22,6 +25,10 @@ public class Item : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// pri kolizii sa harcom item zmizne a pustime k tomu prisluchajuci zvuk
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
         if (player.gameIsStarted && other.name == "Player")
