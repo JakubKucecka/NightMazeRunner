@@ -31,7 +31,7 @@ public class Item : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
-        if (player.gameIsStarted && other.name == "Player")
+        if (player.gameIsStarted && other.name == "Person")
         {
             pickUp.Play();
             Destroy(gameObject);

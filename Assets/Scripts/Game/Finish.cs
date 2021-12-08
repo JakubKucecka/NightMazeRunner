@@ -16,7 +16,7 @@ public class Finish : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.name == "Person")
         {
             game.unlockNext();
             game.SaveGameDataToJSON();

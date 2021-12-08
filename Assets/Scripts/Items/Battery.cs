@@ -13,7 +13,7 @@ public class Battery : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.name == "Person")
         {
             player.AddEnergy();
         }

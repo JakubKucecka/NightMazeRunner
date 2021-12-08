@@ -13,7 +13,7 @@ public class MiniMap : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.name == "Person")
         {
             player.useMiniMap = true;
         }

@@ -213,7 +213,7 @@ public class Ghost : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.name == "Person")
         {
             attack = true;
             attackSound.Play();

@@ -22,7 +22,7 @@ public class Skeleton : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
-        if (!game.showMenu && other.name == "Player")
+        if (!game.showMenu && other.name == "Person")
         {
             boneSound.Play();
             game.ghost.bonePosition = transform.position;
