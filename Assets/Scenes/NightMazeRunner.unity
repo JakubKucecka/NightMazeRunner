@@ -764,7 +764,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 335939425}
         m_TargetAssemblyTypeName: ShopHnadler, Assembly-CSharp
-        m_MethodName: buyGloves
+        m_MethodName: buyNightVission
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3330,7 +3330,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 533499213}
         m_TargetAssemblyTypeName: StockHandler, Assembly-CSharp
-        m_MethodName: updateGloves
+        m_MethodName: updatenightVission
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
