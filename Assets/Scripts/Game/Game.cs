@@ -224,7 +224,7 @@ public class Game : MonoBehaviour
 
         levelPositions.Add(batteryPrefab, new List<Vector3>());
         levelPositions[batteryPrefab].Add(new Vector3(5f, 6f, -15f));
-        levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, 15f));
+        levelPositions[batteryPrefab].Add(new Vector3(-15f, 6f, -5f));
         levelPositions[batteryPrefab].Add(new Vector3(25f, 6f, -5f));
 
         levelPositions.Add(mapPrefab, new List<Vector3>());
@@ -243,7 +243,7 @@ public class Game : MonoBehaviour
         LoadGameDataFromJSON();
         ghost.ReloadGhost();
         player.RestartPlayer();
-        infoCanvas.gameObject.SetActive(true);
+        cameraHandler.reloadCameras();
 
         // nastavenie tmy na vektor 0,0,0
         night.transform.localPosition = Vector3.zero;
