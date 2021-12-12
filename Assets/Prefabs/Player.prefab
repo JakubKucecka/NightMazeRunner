@@ -2424,9 +2424,8 @@ MonoBehaviour:
   rotateControler: {fileID: 6582862330282054070}
   detector: {fileID: 6582862328749809385}
   nightVisionGloves: {fileID: 1149983572118257775}
-  detectorCanvas:
-  - {fileID: 0}
-  - {fileID: 1990476226}
+  globalDetectorCanvas: {fileID: 0}
+  playerDetectorCanvas: {fileID: 1990476226}
   night: {fileID: 0}
   ghost: {fileID: 0}
   redMat: {fileID: 2100000, guid: f5257a8261a988c40affe9470fd30ea3, type: 2}

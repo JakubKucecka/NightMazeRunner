@@ -3094,6 +3094,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393772057}
   m_CullTransparentMesh: 1
+--- !u!1 &408501538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 499228937, guid: 019b36d1369a57441954fe5aa22e9bbf, type: 3}
+  m_PrefabInstance: {fileID: 8732998600788257870}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &428539181
 GameObject:
   m_ObjectHideFlags: 0
@@ -8280,7 +8285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f5fa8f8308554409fcf80d12315242, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f5fa8f8308554409fcf80d12315242, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11297,6 +11302,8 @@ MonoBehaviour:
   nightVisionGloves: {fileID: 2005775944}
   globalNightVission: {fileID: 1972297381}
   playerNightVission: {fileID: 382799973}
+  globalInfoCanvas: {fileID: 2085575123}
+  playerInfoCanvas: {fileID: 408501538}
   nightVissionLevel: 0
 --- !u!114 &1410477190
 MonoBehaviour:
@@ -12556,7 +12563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 291b2daed4b09704a8dfb6c34ed20e30, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 291b2daed4b09704a8dfb6c34ed20e30, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16512,11 +16519,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 951271158}
     - target: {fileID: 3536051246221763136, guid: ba93260fe4d482744859fd8aed677f5a, type: 3}
-      propertyPath: attackCanvas.Array.data[0]
+      propertyPath: globalAttackCanvas
       value: 
       objectReference: {fileID: 1520880347}
     - target: {fileID: 3536051246221763136, guid: ba93260fe4d482744859fd8aed677f5a, type: 3}
-      propertyPath: attackCanvas.Array.data[1]
+      propertyPath: playerAttackCanvas
       value: 
       objectReference: {fileID: 1857350660}
     - target: {fileID: 4011934156142096137, guid: ba93260fe4d482744859fd8aed677f5a, type: 3}
@@ -16718,7 +16725,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 927011937}
     - target: {fileID: 8941313146116825863, guid: 019b36d1369a57441954fe5aa22e9bbf, type: 3}
-      propertyPath: detectorCanvas.Array.data[0]
+      propertyPath: globalDetectorCanvas
       value: 
       objectReference: {fileID: 614014087}
     m_RemovedComponents: []

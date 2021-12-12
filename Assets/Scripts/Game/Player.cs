@@ -37,7 +37,9 @@ public class Player : MonoBehaviour
     public GameObject nightVisionGloves;
 
     [SerializeField]
-    List<Canvas> detectorCanvas = new List<Canvas>();
+    Canvas globalDetectorCanvas;
+    [SerializeField]
+    Canvas playerDetectorCanvas;
     [SerializeField]
     GameObject night;
     [SerializeField]
@@ -128,10 +130,8 @@ public class Player : MonoBehaviour
             else if (detector != null && blinkTime < Time.time)
             {
                 detector.GetComponent<MeshRenderer>().material = greenMat;
-                foreach (var c in detectorCanvas)
-                {
-                    c.gameObject.SetActive(false);
-                }
+                playerDetectorCanvas.gameObject.SetActive(false);
+                globalDetectorCanvas.gameObject.SetActive(false);
             }
         }
     }
@@ -276,10 +276,8 @@ public class Player : MonoBehaviour
                 alarmSound.Stop();
                 alarmPlay = false;
             }
-            foreach (var c in detectorCanvas)
-            {
-                c.gameObject.SetActive(false);
-            }
+            playerDetectorCanvas.gameObject.SetActive(false);
+            globalDetectorCanvas.gameObject.SetActive(false);
         }
         else
         {
@@ -290,9 +288,12 @@ public class Player : MonoBehaviour
                 alarmSound.Play();
                 alarmPlay = true;
             }
-            foreach (var c in detectorCanvas)
+            if (moveControler.firstPerson)
             {
-                c.gameObject.SetActive(true);
+                playerDetectorCanvas.gameObject.SetActive(true);
+            } else
+            {
+                globalDetectorCanvas.gameObject.SetActive(true);
             }
         }
     }

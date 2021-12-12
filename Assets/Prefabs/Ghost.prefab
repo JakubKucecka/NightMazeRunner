@@ -65,9 +65,8 @@ MonoBehaviour:
   startSpeed: 4
   speed: 4
   player: {fileID: 0}
-  attackCanvas:
-  - {fileID: 0}
-  - {fileID: 0}
+  globalAttackCanvas: {fileID: 0}
+  playerAttackCanvas: {fileID: 0}
   border: 25
   bonePosition: {x: 0, y: 0, z: 0}
   goForBone: 0

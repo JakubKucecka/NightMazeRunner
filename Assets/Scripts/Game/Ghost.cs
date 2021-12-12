@@ -9,7 +9,9 @@ public class Ghost : MonoBehaviour
     [SerializeField]
     Player player;
     [SerializeField]
-    List<Canvas> attackCanvas = new List<Canvas>();
+    Canvas globalAttackCanvas;
+    [SerializeField]
+    Canvas playerAttackCanvas;
 
     [SerializeField]
     int border = 25;
@@ -116,18 +118,20 @@ public class Ghost : MonoBehaviour
             if (attack && blinkTime < Time.time && blinkCounter < 10)
             {
                 blinkTime = Time.time + blinkTimeChange;
-                foreach (var a in attackCanvas)
+                if (player.moveControler.firstPerson)
                 {
-                    a.gameObject.SetActive(!a.gameObject.activeSelf);
-                    blinkCounter += 1;
+                    playerAttackCanvas.gameObject.SetActive(!playerAttackCanvas.gameObject.activeSelf);
                 }
+                else
+                {
+                    globalAttackCanvas.gameObject.SetActive(!globalAttackCanvas.gameObject.activeSelf);
+                }
+                    blinkCounter += 1;
             }
             else
             {
-                foreach (var a in attackCanvas)
-                {
-                    a.gameObject.SetActive(false);
-                }
+                globalAttackCanvas.gameObject.SetActive(false);
+                playerAttackCanvas.gameObject.SetActive(false);
             }
         }
         else

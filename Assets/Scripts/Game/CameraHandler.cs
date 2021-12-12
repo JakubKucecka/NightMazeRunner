@@ -25,6 +25,11 @@ public class CameraHandler : MonoBehaviour
     [SerializeField]
     GameObject playerNightVission;
 
+    [SerializeField]
+    GameObject globalInfoCanvas;
+    [SerializeField]
+    GameObject playerInfoCanvas;
+
     public int nightVissionLevel;
 
     private void Start()
@@ -91,6 +96,9 @@ public class CameraHandler : MonoBehaviour
         if (firstPersonCamera.enabled)
         {
             // show main camera
+            globalInfoCanvas.SetActive(true);
+            playerInfoCanvas.SetActive(false);
+
             firstPersonCamera.enabled = false;
             overheadCamera.enabled = true;
 
@@ -102,6 +110,9 @@ public class CameraHandler : MonoBehaviour
         else
         {
             // show first person camera
+            globalInfoCanvas.SetActive(false);
+            playerInfoCanvas.SetActive(true);
+
             firstPersonCamera.enabled = true;
             overheadCamera.enabled = false;
 
@@ -120,5 +131,15 @@ public class CameraHandler : MonoBehaviour
         player.useNightVission = false;
         moveControler = player.moveControler;
         rotateControler = player.rotateControler;
+        if (firstPersonCamera.enabled)
+        {
+            globalInfoCanvas.SetActive(false);
+            playerInfoCanvas.SetActive(true);
+        }
+        else
+        {
+            globalInfoCanvas.SetActive(true);
+            playerInfoCanvas.SetActive(false);
+        }
     }
 }
